@@ -14,10 +14,6 @@
   --oled: #000000;
 }
 
-.App {
-  text-align: center;
-}
-
 .largeLogo {
   height: 40vmin;
   pointer-events: none;

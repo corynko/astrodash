@@ -151,7 +151,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="App">
+      <div className="textCenter">
         <header className="flex center column coverPage gothamBook">
           <img src={logo} className="largeLogo" alt="astrodash logo" />
           <p>
