@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.690b4e54.css",
+    "main.js": "/static/js/main.bf717b5d.js",
+    "static/js/787.e4618841.chunk.js": "/static/js/787.e4618841.chunk.js",
+    "static/media/GothamBook.ttf": "/static/media/GothamBook.58fb9151c57e59668f17.ttf",
+    "static/media/Gotham-Thin.otf": "/static/media/Gotham-Thin.6447770f7eb4c8885d73.otf",
+    "static/media/Gotham-Light.otf": "/static/media/Gotham-Light.59aa40045d8df0b87a73.otf",
+    "static/media/astrodash_astrodash_full_outline_whitetrans.svg": "/static/media/astrodash_astrodash_full_outline_whitetrans.ec201aad5a0196f47d06528b66495aab.svg",
+    "index.html": "/index.html",
+    "main.690b4e54.css.map": "/static/css/main.690b4e54.css.map",
+    "main.bf717b5d.js.map": "/static/js/main.bf717b5d.js.map",
+    "787.e4618841.chunk.js.map": "/static/js/787.e4618841.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.690b4e54.css",
+    "static/js/main.bf717b5d.js"
+  ]
+}
