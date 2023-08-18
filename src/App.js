@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./assets/svg/astrodash_astrodash_full_outline_whitetrans.svg";
+import "./App.css";
 
 function App() {
   return (
