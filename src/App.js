@@ -1,13 +1,17 @@
-//TODO: delete line 2 after creating Nav
-import logo from "./assets/svg/astrodash_astrodash_full_outline_whitetrans.svg";
-
 //react imports
 import * as React from "react";
 
 //nav router
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
+//import page styles
 import "./App.css";
+
+//import page links
+import Nav from "./components/navComponents/Nav";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Contact from "./pages/Contact";
 
 //mui imports
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -15,9 +19,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
-  //TODO: Implement optional shooting mode - carmine only color on OLED (ideally) black
+  //TODO: Implement optional shooting mode - single color carmine on OLED (ideally) black
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
+  //ALERT: You may want to minimize the theme while working on this codebase
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -53,6 +58,43 @@ function App() {
             main: "#a9fdac",
           },
         },
+        // palette: {
+        //   mode: "shooting",
+        //   primary: {
+        //     main: "#640202",
+        //     contrastText: "rgba(226,226,226,0.31)",
+        //   },
+        //   secondary: {
+        //     main: "#640202",
+        //     contrastText: "rgba(243,243,243,0.3)",
+        //   },
+        //   background: {
+        //     default: "#000000",
+        //     paper: "#010101",
+        //   },
+        //   text: {
+        //     primary: "#640202",
+        //     hint: "#640202",
+        //     secondary: "#640202",
+        //     disabled: "#640202",
+        //   },
+        //   error: {
+        //     main: "#640202",
+        //     contrastText: "rgba(255,255,255,0.49)",
+        //   },
+        //   warning: {
+        //     main: "#640202",
+        //     contrastText: "rgba(255,255,255,0.53)",
+        //   },
+        //   info: {
+        //     main: "#640202",
+        //     contrastText: "rgba(255,255,255,0.27)",
+        //   },
+        //   success: {
+        //     main: "#640202",
+        //     contrastText: "rgba(255,255,255,0.34)",
+        //   },
+        // },
         typography: {
           fontSize: 16,
           fontWeightLight: 200,
@@ -145,29 +187,24 @@ function App() {
         },
         spacing: 8.25,
       }),
+
     [prefersDarkMode]
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className="textCenter">
-        <header className="flex center column coverPage gothamBook">
-          <img src={logo} className="largeLogo" alt="astrodash logo" />
-          <p>
-            <span className="gothamLight">astroDash</span> is coming soon!
-          </p>
-          <a
-            className="standardLink"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="container">
+          <Nav />
+          <Routes>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/*" element={<Home />} />
+          </Routes>
+        </div>
+      </ThemeProvider>
+    </Router>
   );
 }
 
