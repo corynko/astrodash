@@ -155,7 +155,7 @@ function App() {
         <header className="flex center column coverPage gothamBook">
           <img src={logo} className="largeLogo" alt="astrodash logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            <span className="gothamLight">astroDash</span> is coming soon!
           </p>
           <a
             className="standardLink"

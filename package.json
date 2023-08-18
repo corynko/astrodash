@@ -1,5 +1,5 @@
 {
-  "name": "astropage",
+  "name": "astrodash",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://astrodash.space",
@@ -48,5 +48,8 @@
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
