@@ -58,6 +58,15 @@
   flex-direction: column;
 }
 
+/* standardized non-flex position class declarations */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
 /* standardized text class declarations */
 .textStart {
   text-align: start;
@@ -85,6 +94,7 @@
   font-size: calc(10px + 2vmin);
 }
 
+/* standardized link class declarations */
 .standardLink {
   color: var(--medium2);
   text-decoration: none;
@@ -98,6 +108,29 @@
   color: var(--darker);
   font-size: 98%;
   transition: all 0.2s ease-in-out;
+}
+
+/* logo svg path classes */
+.cls-1,
+.cls-2 {
+  stroke-miterlimit: 10;
+}
+
+.cls-1,
+.cls-3 {
+  stroke: #f3f3f3;
+  stroke-width: 2px;
+}
+
+.cls-2 {
+  stroke: #f3f3f3;
+  stroke-width: 2px;
+}
+
+.toolBar {
+  position: relative;
+  max-width: 100%;
+  padding-left: 20px;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
