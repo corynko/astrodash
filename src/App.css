@@ -122,6 +122,10 @@
   margin: 25px;
 }
 
+.p75 {
+  padding-top: 75px;
+}
+
 /* logo svg path classes */
 .cls-1,
 .cls-2 {
@@ -168,4 +172,52 @@
 
 .homeHeader {
   color: var(--lightest);
+}
+
+/* .signupForm {
+  background-color: var(--black);
+  color: var(--darkwhite);
+} */
+
+/* Modal Container */
+.signupForm {
+  background-color: var(--black);
+  padding: 20px 30px; /* Adjust based on your design */
+  width: 350px; /* Adjust based on your design */
+  margin: auto;
+}
+
+/* Form Labels */
+.signupForm label {
+  display: block;
+  margin-bottom: 5px; /* Adjust based on your design */
+  color: #f3f3f3; /* This is a guess; adjust based on your design */
+}
+
+/* Input Fields */
+.signupForm input[type="text"],
+.signupForm input[type="email"],
+.signupForm input[type="password"],
+.signupForm input[type="date"],
+.signupForm input[type="tel"] {
+  width: 100%;
+  padding: 10px; /* Adjust based on your design */
+  border: 2px solid #ccc; /* This is a guess; adjust based on your design */
+  background-color: var(--black);
+  border-radius: 4px; /* Adjust based on your design */
+  margin-bottom: 15px; /* Adjust based on your design */
+  box-sizing: border-box;
+  color: var(--darkwhite);
+}
+
+/* Submit Button */
+.signupForm button[type="submit"] {
+  background-color: #007bff; /* This is a guess; adjust based on your design */
+  color: #fff;
+  padding: 10px 15px; /* Adjust based on your design */
+  border: none;
+  border-radius: 4px; /* Adjust based on your design */
+  cursor: pointer;
+  display: block;
+  width: 100%;
 }
