@@ -6,6 +6,7 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 //import page styles
 import "./App.css";
+import "./index.css";
 
 //import page links
 import Nav from "./components/navComponents/Nav";
@@ -103,7 +104,7 @@ function App() {
           fontWeightBold: 600,
           htmlFontSize: 17,
           h1: {
-            fontFamily: "Montserrat",
+            fontFamily: "GothamBook",
             fontSize: "6rem",
             fontWeight: 200,
             lineHeight: 1.3,
@@ -124,7 +125,7 @@ function App() {
             fontWeight: 300,
           },
           subtitle1: {
-            fontFamily: "Montserrat",
+            fontFamily: "GothamLight",
           },
           subtitle2: {
             fontFamily: "Lato",
@@ -193,16 +194,14 @@ function App() {
 
   return (
     <Router>
+      <CssBaseline />
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="container">
-          <Nav />
-          <Routes>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/*" element={<Home />} />
-          </Routes>
-        </div>
+        <Nav />
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/*" element={<Home />} />
+        </Routes>
       </ThemeProvider>
     </Router>
   );
