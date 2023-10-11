@@ -3,7 +3,9 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import AppBar from "@mui/material/AppBar";
 
-import LogoDrawDesktop from "./desktop/logoDrawDesktop";
+// import LogoDrawDesktop from "./desktop/logoDrawDesktop";
+// import WordDrawDesktop from "./desktop/wordDrawDesktop";
+import FullLogoDesktop from "./desktop/fullLogoDesktop";
 import NavItemsDesktop from "./desktop/navItemsDesktop";
 
 export default function Nav() {
@@ -23,7 +25,7 @@ export default function Nav() {
             alignItems: "center",
           }}
         >
-          <LogoDrawDesktop />
+          <FullLogoDesktop />
           <NavItemsDesktop />
         </Box>
       </Toolbar>
