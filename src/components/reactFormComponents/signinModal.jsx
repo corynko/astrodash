@@ -40,7 +40,7 @@ function SigninModal() {
         }}
         onClick={handleOpen}
       >
-        sign up
+        sign in
       </Button>
       <Modal
         aria-labelledby="astroDash-sign-up"
