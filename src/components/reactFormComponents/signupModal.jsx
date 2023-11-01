@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import SignupForm from "./signupForm";
+import FormContactMotion from "./signupForm2";
 
 const style = {
   position: "absolute",
@@ -14,10 +15,10 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "#0A0A0A",
+  bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
+  p: 3,
 };
 
 function SignupModal() {
@@ -57,7 +58,7 @@ function SignupModal() {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <SignupForm />
+            <FormContactMotion />
           </Box>
         </Fade>
       </Modal>
