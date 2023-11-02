@@ -199,6 +199,16 @@
   width: 350px;
 }
 
+.signupForm2 {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 15px 15px 15px;
+}
+
+.signupFormItem {
+  padding: 150px;
+}
+
 /* Form Labels */
 .signupForm label {
   display: flex;

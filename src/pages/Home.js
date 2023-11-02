@@ -3,8 +3,6 @@ import { useTheme } from "@mui/material/styles";
 import Sparkles from "react-sparkle";
 import { motion } from "framer-motion";
 
-import SignupForm from "../components/reactFormComponents/signupForm";
-
 export default function Home() {
   let divVariants = {
     start: { opacity: 0 },

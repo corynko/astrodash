@@ -33,7 +33,7 @@ function LogoDrawDesktop() {
           display={{ xs: "none", md: "flex" }}
         >
           <motion.rect
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -44,7 +44,7 @@ function LogoDrawDesktop() {
             transform="translate(-.74 211.29) rotate(-18.74)"
           />
           <motion.path
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -52,7 +52,7 @@ function LogoDrawDesktop() {
           />
 
           <motion.rect
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -63,7 +63,7 @@ function LogoDrawDesktop() {
             transform="translate(-17.29 181.21) rotate(-18.74)"
           />
           <motion.rect
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -74,7 +74,7 @@ function LogoDrawDesktop() {
             transform="translate(-46.3 129.4) rotate(-18.74)"
           />
           <motion.rect
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -85,7 +85,7 @@ function LogoDrawDesktop() {
             transform="translate(-71.29 82.61) rotate(-18.74)"
           />
           <motion.rect
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -96,7 +96,7 @@ function LogoDrawDesktop() {
             transform="translate(-81.5 63.49) rotate(-18.74)"
           />
           <motion.path
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -104,7 +104,7 @@ function LogoDrawDesktop() {
           />
 
           <motion.circle
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -114,7 +114,7 @@ function LogoDrawDesktop() {
             transform="translate(-7.88 12.26) rotate(-1.68)"
           />
           <motion.path
-            class="cls-1"
+            className="cls-1"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -122,14 +122,14 @@ function LogoDrawDesktop() {
           />
 
           <motion.path
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m437.98,345.9c0,15.88-10.56,28.75-23.6,28.75h0c-13.03,0-23.6-12.87-23.6-28.75v-24.56c0-15.88,10.56-28.75,23.6-28.75h0c13.03,0,23.6,12.87,23.6,28.75v24.56Z"
           />
           <motion.rect
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -139,7 +139,7 @@ function LogoDrawDesktop() {
             height="41.43"
           />
           <motion.rect
-            class="cls-2"
+            className="cls-2"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -149,42 +149,42 @@ function LogoDrawDesktop() {
             height="54.61"
           />
           <motion.path
-            class="cls-2"
+            className="cls-2"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m333.74,563.14c-2.6,5.37-9.07,7.61-14.44,5.01h0c-5.37-2.6-7.61-9.07-5.01-14.44l63.5-130.96c2.6-5.37,9.07-7.61,14.44-5.01h0c5.37,2.6,7.61,9.07,5.01,14.44l-63.5,130.96Z"
           />
           <motion.path
-            class="cls-2"
+            className="cls-2"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m285.45,655.83c-1.88,3.87-6.54,5.49-10.41,3.61h0c-3.87-1.88-5.49-6.54-3.61-10.41l45.79-94.44c1.88-3.87,6.54-5.49,10.41-3.61h0c3.87,1.88,5.49,6.54,3.61,10.41l-45.79,94.44Z"
           />
           <motion.path
-            class="cls-2"
+            className="cls-2"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m255.52,710.37c-1.05,2.16-3.77,3-6.09,1.88h0c-2.31-1.12-3.34-3.78-2.3-5.94l25.53-52.65c1.05-2.16,3.77-3,6.09-1.88h0c2.31,1.12,3.34,3.78,2.3,5.94l-25.53,52.65Z"
           />
           <motion.path
-            class="cls-2"
+            className="cls-2"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m499.51,562.41c2.6,5.37,9.07,7.61,14.44,5.01h0c5.37-2.6,7.61-9.07,5.01-14.44l-63.5-130.96c-2.6-5.37-9.07-7.61-14.44-5.01h0c-5.37,2.6-7.61,9.07-5.01,14.44l63.5,130.96Z"
           />
           <motion.path
-            class="cls-2"
+            className="cls-2"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m547.8,655.1c1.88,3.87,6.54,5.49,10.41,3.61h0c3.87-1.88,5.49-6.54,3.61-10.41l-45.79-94.44c-1.88-3.87-6.54-5.49-10.41-3.61h0c-3.87,1.88-5.49,6.54-3.61,10.41l45.79,94.44Z"
           />
           <motion.path
-            class="cls-2"
+            className="cls-2"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -192,28 +192,28 @@ function LogoDrawDesktop() {
           />
 
           <motion.path
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m425.09,545.54c0,5.39-4.37,9.76-9.76,9.76h0c-5.39,0-9.76-4.37-9.76-9.76v-131.41c0-5.39,4.37-9.76,9.76-9.76h0c5.39,0,9.76,4.37,9.76,9.76v131.41Z"
           />
           <motion.path
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m422.37,633.28c0,3.64-3.15,6.58-7.04,6.58h0c-3.89,0-7.04-2.95-7.04-6.58v-88.64c0-3.64,3.15-6.58,7.04-6.58h0c3.89,0,7.04,2.95,7.04,6.58v88.64Z"
           />
           <motion.path
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m419.54,678.46c0,2.32-1.88,4.21-4.21,4.21h0c-2.32,0-4.21-1.88-4.21-4.21v-56.63c0-2.32,1.88-4.21,4.21-4.21h0c2.32,0,4.21,1.88,4.21,4.21v56.63Z"
           />
           <motion.path
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
@@ -221,14 +221,14 @@ function LogoDrawDesktop() {
           />
 
           <motion.path
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}
             d="m261.64,710.4c0,1.41-1.14,2.56-2.56,2.56h-16.51c-1.41,0-2.56-1.14-2.56-2.56h0c0-1.41,1.14-2.56,2.56-2.56h16.51c1.41,0,2.56,1.14,2.56,2.56h0Z"
           />
           <motion.path
-            class="cls-3"
+            className="cls-3"
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={pathVariants}

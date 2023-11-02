@@ -1,4 +1,4 @@
-# astrodash
+# astroDash
 
 ## Get Your Shoot Together
 

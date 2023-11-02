@@ -1,22 +1,8 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { motion } from "framer-motion";
-import { useFormControls } from "./formValidation.tsx";
+import { useFormControls } from "./formValidation";
 
-function FormContactMotion() {
-  let divVariants = {
-    start: { opacity: 0, stroke: "#F5F5F5" },
-    finished: {
-      opacity: 1,
-      fill: "#F5F5F5",
-      transition: {
-        duration: 1,
-        ease: "easeInOut",
-        delay: 1.9,
-      },
-    },
-  };
-
+function FormContactMotion({ handleClose }) {
   const inputFieldValues = [
     {
       name: "fullName",
@@ -24,9 +10,9 @@ function FormContactMotion() {
       id: "full-name",
     },
     {
-      name: "phoneNumber",
+      name: "phone",
       label: "Phone Number",
-      id: "phone-number",
+      id: "phone",
       type: "tel",
     },
     {
@@ -51,19 +37,17 @@ function FormContactMotion() {
   const { handleInputValue, handleFormSubmit, formIsValid, errors } =
     useFormControls();
 
+  const handleSubmit = async (e) => {
+    await handleFormSubmit(e);
+    if (formIsValid()) {
+      handleClose();
+    }
+  };
+
   return (
     <div className="divWrapper">
-      <motion.div
-        variants={divVariants}
-        initial="start"
-        animate="finished"
-        className="contactForm center"
-      >
-        <form
-          onSubmit={handleFormSubmit}
-          className="contactForm"
-          id="contactForm"
-        >
+      <div className="center">
+        <form className="signupForm2" id="signupForm">
           {inputFieldValues.map((inputFieldValue, index) => {
             return (
               <TextField
@@ -74,7 +58,8 @@ function FormContactMotion() {
                 label={inputFieldValue.label}
                 type={inputFieldValue.type}
                 autoComplete="none"
-                className="contactFormItem"
+                className="signupFormItem"
+                style={{ marginTop: "15px", marginBottom: "15px" }}
                 {...(errors[inputFieldValue.name] && {
                   error: true,
                   helperText: errors[inputFieldValue.name],
@@ -82,11 +67,17 @@ function FormContactMotion() {
               />
             );
           })}
-          <Button type="submit" disabled={!formIsValid()}>
+          <Button
+            type="submit"
+            name="submit"
+            value="Submit"
+            disabled={!formIsValid()}
+            onClick={handleSubmit}
+          >
             Sign Me Up!
           </Button>
         </form>
-      </motion.div>
+      </div>
     </div>
   );
 }
