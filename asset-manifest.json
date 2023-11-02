@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.690b4e54.css",
-    "main.js": "/static/js/main.5cc36f91.js",
+    "main.css": "/static/css/main.73dee21f.css",
+    "main.js": "/static/js/main.cbd5bd9b.js",
     "static/js/787.164816f5.chunk.js": "/static/js/787.164816f5.chunk.js",
+    "static/media/astrodash_home_cover_ken_cheung.jpg": "/static/media/astrodash_home_cover_ken_cheung.08f839757d296f4c02a8.jpg",
     "static/media/GothamBook.ttf": "/static/media/GothamBook.58fb9151c57e59668f17.ttf",
     "static/media/Gotham-Thin.otf": "/static/media/Gotham-Thin.6447770f7eb4c8885d73.otf",
     "static/media/Gotham-Light.otf": "/static/media/Gotham-Light.59aa40045d8df0b87a73.otf",
-    "static/media/astrodash_astrodash_full_outline_whitetrans.svg": "/static/media/astrodash_astrodash_full_outline_whitetrans.ec201aad5a0196f47d06528b66495aab.svg",
     "index.html": "/index.html",
-    "main.690b4e54.css.map": "/static/css/main.690b4e54.css.map",
-    "main.5cc36f91.js.map": "/static/js/main.5cc36f91.js.map",
+    "main.73dee21f.css.map": "/static/css/main.73dee21f.css.map",
+    "main.cbd5bd9b.js.map": "/static/js/main.cbd5bd9b.js.map",
     "787.164816f5.chunk.js.map": "/static/js/787.164816f5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.690b4e54.css",
-    "static/js/main.5cc36f91.js"
+    "static/css/main.73dee21f.css",
+    "static/js/main.cbd5bd9b.js"
   ]
 }
