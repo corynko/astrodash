@@ -18,7 +18,7 @@ const PostContactForm = async (
 const initialFormValues = {
   fullName: "",
   email: "",
-  phoneNumber: "",
+  phone: "",
   password: "",
   passwordCheck: "",
   formSubmitted: false,
@@ -30,25 +30,57 @@ export const useFormControls = () => {
   const [errors, setErrors] = useState({} as any);
 
   const validate: any = (fieldValues = values) => {
+    // console.log(fieldValues);
     let temp: any = { ...errors };
 
     if ("fullName" in fieldValues)
-      temp.firstName = fieldValues.firstName ? "" : "This field is required.";
+      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
 
-    if ("password" in fieldValues)
-      temp.lastName = fieldValues.lastName ? "" : "This field is required.";
+    if ("password" in fieldValues) {
+      temp.password = fieldValues.password ? "" : "This field is required.";
+      if (fieldValues.password) {
+        if (!/[a-z]/.test(fieldValues.password))
+          temp.password +=
+            "Password must contain at least one lowercase letter. ";
+        if (!/[A-Z]/.test(fieldValues.password))
+          temp.password +=
+            "Password must contain at least one uppercase letter. ";
+        if (!/\d/.test(fieldValues.password))
+          temp.password += "Password must contain at least one number. ";
+        if (!/[^\w\d\s]/.test(fieldValues.password))
+          temp.password +=
+            "Password must contain at least one special character. ";
+        if (fieldValues.password.length < 8)
+          temp.password += "Password must be at least 8 characters long. ";
+      }
+    }
+
+    if ("passwordCheck" in fieldValues) {
+      temp.passwordCheck = fieldValues.passwordCheck
+        ? ""
+        : "This field is required.";
+      //   console.log(
+      //     `password: ${fieldValues.password}, passwordCheck: ${fieldValues.passwordCheck}`
+      //   );
+      if (fieldValues.passwordCheck !== fieldValues.password) {
+        temp.passwordCheck = "Passwords do not match!";
+      }
+    }
 
     if ("email" in fieldValues) {
       temp.email = fieldValues.email ? "" : "This field is required.";
       if (fieldValues.email)
         temp.email = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)
           ? ""
-          : "Email is not valid.";
+          : "Please enter a valid email.";
     }
 
-    if ("message" in fieldValues)
-      temp.message =
-        fieldValues.message.length !== 0 ? "" : "This field is required.";
+    if ("phone" in fieldValues) {
+      if (fieldValues.phone)
+        temp.phone = /^[0-9]+$/.test(fieldValues.phone)
+          ? ""
+          : "Please enter only numbers.";
+    }
 
     setErrors({
       ...temp,
@@ -57,11 +89,11 @@ export const useFormControls = () => {
 
   const handleInputValue = (e: any) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
+    setValues((prevValues) => {
+      const newValues = { ...prevValues, [name]: value };
+      validate({ ...newValues, [name]: value });
+      return newValues;
     });
-    validate({ [name]: value });
   };
 
   const handleSuccess = () => {
@@ -83,7 +115,6 @@ export const useFormControls = () => {
   const formIsValid = (fieldValues = values) => {
     const isValid =
       fieldValues.fullName &&
-      fieldValues.phoneNumber &&
       fieldValues.email &&
       fieldValues.password &&
       fieldValues.passwordCheck;
@@ -93,31 +124,30 @@ export const useFormControls = () => {
   };
 
   const handleFormSubmit = async (e: any) => {
+    // console.log("Form is Being Submitted!");
     e.preventDefault();
     const isValid =
       Object.values(errors).every((x) => x === "") && formIsValid();
     if (isValid) {
-      emailjs
-        .sendForm(SERVICE_ID, TEMPLATE_ID, "#contactForm", PUBLIC_KEY)
-        .then(
-          (result) => {
-            console.log(result.text);
-            Swal.fire({
-              icon: "success",
-              title:
-                "Thanks for signing up! Check your email to finish the process.",
-            });
-          },
-          (error) => {
-            console.log(error.text);
-            Swal.fire({
-              icon: "error",
-              title: "Oops, something went wrong. Please try again later.",
-              text: error.text,
-            });
-          }
-        );
-      e.target.reset();
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, "#signupForm", PUBLIC_KEY).then(
+        (result) => {
+          console.log(result.text);
+          Swal.fire({
+            icon: "success",
+            title:
+              "Thanks for signing up! Check your email to finish the process.",
+          });
+        },
+        (error) => {
+          console.log(error.text);
+          Swal.fire({
+            icon: "error",
+            title: "Oops, something went wrong. Please try again later.",
+            text: error.text,
+          });
+        }
+      );
+      //   e.target.reset();
       await PostContactForm(values, handleSuccess, handleError);
     }
   };

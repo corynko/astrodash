@@ -24,7 +24,9 @@ const style = {
 function SignupModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = (e) => {
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -50,6 +52,7 @@ function SignupModal() {
         onClose={handleClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
+        disableEnforceFocus
         slotProps={{
           backdrop: {
             timeout: 500,
@@ -58,7 +61,7 @@ function SignupModal() {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <FormContactMotion />
+            <FormContactMotion handleClose={handleClose} />
           </Box>
         </Fade>
       </Modal>
