@@ -47,6 +47,7 @@ function FormContactMotion({ handleClose }) {
   return (
     <div className="divWrapper">
       <div className="center">
+        <h2 className="formH2">sign up for astroDash</h2>
         <form className="signupForm2" id="signupForm">
           {inputFieldValues.map((inputFieldValue, index) => {
             return (

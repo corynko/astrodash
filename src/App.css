@@ -177,26 +177,9 @@
   color: var(--lightest);
 }
 
-/* .signupForm {
-  background-color: var(--black);
-  color: var(--darkwhite);
-} */
-
-.signupForm h1 {
-  color: var(--darkest);
+.formH2 {
+  color: var(--medium);
   text-align: center;
-}
-
-.formImg {
-  height: 50px;
-  width: 50px;
-}
-
-/* Modal Container */
-.signupForm {
-  background-color: var(--black);
-  padding: 0px 30px;
-  width: 350px;
 }
 
 .signupForm2 {
@@ -207,62 +190,4 @@
 
 .signupFormItem {
   padding: 150px;
-}
-
-/* Form Labels */
-.signupForm label {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 5px;
-  color: var(--darkwhite);
-  font-family: "GothamBook";
-  font-size: 90%;
-  text-align: center;
-}
-
-/* Input Fields */
-.signupForm input[type="text"],
-.signupForm input[type="email"],
-.signupForm input[type="password"],
-.signupForm input[type="date"],
-.signupForm input[type="tel"] {
-  width: 100%;
-  font-family: "GothamThin";
-  padding: 10px;
-  border: 2px solid var(--darkwhite);
-  background-color: var(--black);
-  border-radius: 4px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-  font-weight: 900;
-  color: var(--white);
-}
-
-/* Submit Button */
-.signupForm button {
-  background-color: var(--darkest);
-  color: var(--darkwhite);
-  padding: 10px 15px;
-  border: none;
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  transition: all 0.3s ease-in-out;
-}
-
-.signupForm button:hover {
-  background-color: var(--medium);
-  color: var(--black);
-  transition: all 0.3s ease-in-out;
-}
-
-.signupForm button:active {
-  font-size: 85%;
-  -webkit-box-shadow: -5px 0px 7px -3px #a9fdac, 5px 0px 7px -3px #a9fdac,
-    5px 5px 15px 5px rgba(169, 253, 172, 10);
-  box-shadow: -5px 0px 7px -3px var(--medium2), 5px 0px 7px -3px var(--medium2),
-    5px 5px 15px 5px rgba(0, 0, 0, 0);
-  text-shadow: 0.25px 0.25px 3px rgba(66, 68, 90, 1);
-  transition: all 0.2s ease-in-out;
 }
