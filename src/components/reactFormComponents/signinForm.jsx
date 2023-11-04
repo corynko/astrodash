@@ -58,7 +58,7 @@ function SignInForm({ handleClose }) {
             disabled={!formIsValid()}
             onClick={handleSubmit}
           >
-            Sign Me Up!
+            sign in
           </Button>
         </form>
       </div>
