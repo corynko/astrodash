@@ -23,21 +23,6 @@ export const useFormControls = () => {
 
     if ("password" in fieldValues) {
       temp.password = fieldValues.password ? "" : "This field is required.";
-      if (fieldValues.password) {
-        if (!/[a-z]/.test(fieldValues.password))
-          temp.password +=
-            "Password must contain at least one lowercase letter. ";
-        if (!/[A-Z]/.test(fieldValues.password))
-          temp.password +=
-            "Password must contain at least one uppercase letter. ";
-        if (!/\d/.test(fieldValues.password))
-          temp.password += "Password must contain at least one number. ";
-        if (!/[^\w\d\s]/.test(fieldValues.password))
-          temp.password +=
-            "Password must contain at least one special character. ";
-        if (fieldValues.password.length < 8)
-          temp.password += "Password must be at least 8 characters long. ";
-      }
     }
 
     if ("email" in fieldValues) {
