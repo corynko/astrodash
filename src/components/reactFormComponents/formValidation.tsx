@@ -6,15 +6,6 @@ const SERVICE_ID = "service_egqlubp";
 const TEMPLATE_ID = "template_f9v1qnv";
 const PUBLIC_KEY = "DXbcwxmNpk-mrWio8";
 
-const PostContactForm = async (
-  values: any,
-  successCallback: any,
-  errorCallback: any
-) => {
-  if (true) successCallback();
-  else errorCallback();
-};
-
 const initialFormValues = {
   fullName: "",
   email: "",
@@ -96,22 +87,6 @@ export const useFormControls = () => {
     });
   };
 
-  const handleSuccess = () => {
-    setValues({
-      ...initialFormValues,
-      formSubmitted: true,
-      success: true,
-    });
-  };
-
-  const handleError = () => {
-    setValues({
-      ...initialFormValues,
-      formSubmitted: true,
-      success: false,
-    });
-  };
-
   const formIsValid = (fieldValues = values) => {
     const isValid =
       fieldValues.fullName &&
@@ -127,7 +102,7 @@ export const useFormControls = () => {
     // console.log("Form is Being Submitted!");
     e.preventDefault();
     const isValid =
-      Object.values(errors).every((x) => x === "") && formIsValid();
+      formIsValid() && Object.values(errors).every((x) => x === "");
     if (isValid) {
       emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, "#signupForm", PUBLIC_KEY).then(
         (result) => {
@@ -137,6 +112,11 @@ export const useFormControls = () => {
             title:
               "Thanks for signing up! Check your email to finish the process.",
           });
+          setValues({
+            ...initialFormValues,
+            formSubmitted: true,
+            success: true,
+          });
         },
         (error) => {
           console.log(error.text);
@@ -145,10 +125,24 @@ export const useFormControls = () => {
             title: "Oops, something went wrong. Please try again later.",
             text: error.text,
           });
+          setValues({
+            ...initialFormValues,
+            formSubmitted: true,
+            success: false,
+          });
         }
       );
-      //   e.target.reset();
-      await PostContactForm(values, handleSuccess, handleError);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops, something went wrong. Please try again later.",
+        text: errors.text,
+      });
+      setValues({
+        ...initialFormValues,
+        formSubmitted: true,
+        success: false,
+      });
     }
   };
 
