@@ -1,8 +1,8 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useFormControls } from "./formValidation";
+import { useFormControls } from "./signupFormValidation";
 
-function FormContactMotion({ handleClose }) {
+function SignUpForm({ handleClose }) {
   const inputFieldValues = [
     {
       name: "fullName",
@@ -48,7 +48,7 @@ function FormContactMotion({ handleClose }) {
     <div className="divWrapper">
       <div className="center">
         <h2 className="formH2">sign up for astroDash</h2>
-        <form className="signupForm2" id="signupForm">
+        <form className="signupForm" id="signupForm">
           {inputFieldValues.map((inputFieldValue, index) => {
             return (
               <TextField
@@ -83,4 +83,4 @@ function FormContactMotion({ handleClose }) {
   );
 }
 
-export default FormContactMotion;
+export default SignUpForm;
