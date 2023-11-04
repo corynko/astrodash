@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import FormContactMotion from "./signupForm2";
+import SignInForm from "./signinForm";
 
 const style = {
   position: "absolute",
@@ -23,7 +23,9 @@ const style = {
 function SigninModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = (e) => {
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -57,7 +59,7 @@ function SigninModal() {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <FormContactMotion />
+            <SignInForm handleClose={handleClose} />
           </Box>
         </Fade>
       </Modal>
