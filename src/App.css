@@ -204,3 +204,8 @@
   flex-direction: column;
   margin: 25px 15px 15px 15px;
 }
+
+.contactForm {
+  display: flex;
+  margin: 25px 15px 15px 15px;
+}
