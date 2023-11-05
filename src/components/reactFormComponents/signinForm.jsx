@@ -42,7 +42,6 @@ function SignInForm({ handleClose }) {
                 label={inputFieldValue.label}
                 type={inputFieldValue.type}
                 autoComplete="none"
-                className="signupFormItem"
                 style={{ marginTop: "15px", marginBottom: "15px" }}
                 {...(errors[inputFieldValue.name] && {
                   error: true,

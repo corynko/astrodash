@@ -93,11 +93,6 @@
   font-family: "GothamLight";
 }
 
-.coverPage {
-  min-height: 100vh;
-  font-size: calc(10px + 2vmin);
-}
-
 /* standardized link class declarations */
 .standardLink {
   color: var(--medium2);
@@ -159,7 +154,7 @@
 /* page-specific items */
 .homeCoverImg,
 .contactCoverImg,
-.projectCoverImg {
+.profileCoverImg {
   position: fixed;
   top: 0;
   width: 100%;
@@ -169,8 +164,17 @@
   z-index: -12;
 }
 
+.coverPage {
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+}
+
 .homeCoverImg {
   background-image: url("./assets/png/astrodash_home_cover_ken_cheung.jpg");
+}
+
+.profileCoverImg {
+  background-image: url("./assets/png/astrodash_profile_cover_pixabay-41951.jpg");
 }
 
 .homeHeader {
@@ -186,8 +190,4 @@
   display: flex;
   flex-direction: column;
   margin: 25px 15px 15px 15px;
-}
-
-.signupFormItem {
-  padding: 150px;
 }
