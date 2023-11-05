@@ -82,6 +82,10 @@
   text-align: center;
 }
 
+.stroke25 {
+  -webkit-text-stroke: 0.25px var(--black);
+}
+
 /* standardized font class declarations */
 .gothamBook {
   font-family: "GothamBook";
@@ -170,11 +174,14 @@
 }
 
 .homeCoverImg {
-  background-image: url("./assets/png/astrodash_home_cover_ken_cheung.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)),
+    url("./assets/png/astrodash_home_cover_ken_cheung.jpg");
 }
 
 .profileCoverImg {
-  background-image: url("./assets/png/astrodash_profile_cover_pixabay-41951.jpg");
+  background-color: rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("./assets/png/astrodash_profile_cover_pixabay-41951.jpg");
 }
 
 .homeHeader {
