@@ -174,14 +174,20 @@
 }
 
 .homeCoverImg {
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)),
-    url("./assets/png/astrodash_home_cover_ken_cheung.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)),
+    url("./assets/png/astrodash_home_cover_marcelo_maturana.jpg");
 }
 
 .profileCoverImg {
   background-color: rgba(0, 0, 0, 0.1);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url("./assets/png/astrodash_profile_cover_pixabay-41951.jpg");
+}
+
+.contactCoverImg {
+  background-color: rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("./assets/png/astrodash_contact_cover_ahasanara_akter.jpg");
 }
 
 .homeHeader {

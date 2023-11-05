@@ -1,4 +1,3 @@
-import React from "react";
 import { useTheme } from "@mui/material/styles";
 import Sparkles from "react-sparkle";
 import { motion } from "framer-motion";
@@ -24,7 +23,7 @@ export default function Home() {
         minSize={2}
         maxSize={8}
         overflowPx={0}
-        fadeOutSpeed={4}
+        fadeOutSpeed={3}
         flicker={true}
         flickerSpeed={"slowest"}
       />
