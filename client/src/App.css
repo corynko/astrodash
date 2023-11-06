@@ -1,0 +1,211 @@
+/* google fonts import */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* color vars */
+:root {
+  --black: #343434;
+  --darkest: #5f75bf;
+  --darker: #9c7ba3;
+  --medium: #93f0de;
+  --medium2: #a9fdac;
+  --lighter: #ffeb99;
+  --lightest: #dde2f8;
+  --white: #f3f3f3;
+  --darkwhite: #e2e2e2;
+
+  --carmine: #640202;
+  --oled: #000000;
+  --trans: #00000000;
+}
+
+.largeLogo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/* standardized flexbox class declarations */
+.flex,
+.center,
+.between,
+.around,
+.start,
+.end,
+.row,
+.column {
+  align-items: center;
+}
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+.between {
+  justify-content: space-between;
+}
+.around {
+  justify-content: space-around;
+}
+
+.start {
+  justify-content: start;
+}
+.end {
+  justify-content: end;
+}
+
+.row {
+  flex-direction: row;
+}
+.column {
+  flex-direction: column;
+}
+
+/* standardized non-flex position class declarations */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+/* standardized text class declarations */
+.textStart {
+  text-align: start;
+}
+.textEnd {
+  text-align: end;
+}
+.textCenter {
+  text-align: center;
+}
+
+.stroke25 {
+  -webkit-text-stroke: 0.25px var(--black);
+}
+
+/* standardized font class declarations */
+.gothamBook {
+  font-family: "GothamBook";
+}
+.gothamThin {
+  font-family: "GothamThin";
+}
+.gothamLight {
+  font-family: "GothamLight";
+}
+
+/* standardized link class declarations */
+.standardLink {
+  color: var(--medium2);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.standardLink:hover {
+  color: var(--darkest);
+  transition: all 0.4s ease-in-out;
+}
+.standardLink:active {
+  color: var(--darker);
+  font-size: 98%;
+  transition: all 0.2s ease-in-out;
+}
+
+/* standardized spacing class declarations */
+.m10 {
+  margin: 10px;
+}
+.m25 {
+  margin: 25px;
+}
+.mNeg35 {
+  margin-left: -35px;
+}
+
+.p75 {
+  padding-top: 75px;
+}
+
+/* logo svg path classes */
+.cls-1,
+.cls-2 {
+  stroke-miterlimit: 10;
+}
+
+.cls-1,
+.cls-3 {
+  stroke: #f3f3f3;
+  stroke-width: 2px;
+}
+
+.cls-2 {
+  stroke: #f3f3f3;
+  stroke-width: 2px;
+}
+
+.toolBar {
+  position: relative;
+  max-width: 100%;
+  padding-left: 20px;
+}
+
+.appBar {
+  background-color: var(--trans);
+}
+
+/* page-specific items */
+.homeCoverImg,
+.contactCoverImg,
+.profileCoverImg {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -12;
+}
+
+.coverPage {
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+}
+
+.homeCoverImg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)),
+    url("./assets/png/astrodash_home_cover_marcelo_maturana.jpg");
+}
+
+.profileCoverImg {
+  background-color: rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("./assets/png/astrodash_profile_cover_pixabay-41951.jpg");
+}
+
+.contactCoverImg {
+  background-color: rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("./assets/png/astrodash_contact_cover_ahasanara_akter.jpg");
+}
+
+.homeHeader {
+  color: var(--lightest);
+}
+
+.formH2 {
+  color: var(--medium);
+  text-align: center;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 15px 15px 15px;
+}
+
+.contactForm {
+  display: flex;
+  margin: 25px 15px 15px 15px;
+}
