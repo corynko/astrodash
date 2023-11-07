@@ -1,5 +1,5 @@
 //react imports
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 //nav router
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
@@ -20,6 +20,27 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
+  // Connection to API
+  const [apiResponse, setAPIResponse] = useState('');
+
+  useEffect(() => {
+    const callAPI = async () => {
+      try{ 
+        const res = await fetch('http://localhost:9000/testAPI');
+        const data = await res.text();
+        setAPIResponse(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    callAPI();
+  }, []);
+
+  useEffect(() => {
+    console.log(apiResponse);
+  }, [apiResponse]);
+
+
   //TODO: Implement optional shooting mode - single color carmine on OLED (ideally) black
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
