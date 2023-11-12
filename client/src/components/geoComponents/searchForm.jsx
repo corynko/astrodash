@@ -23,7 +23,11 @@ function SearchForm() {
       </IconButton>
     </form>
   );
-  return <></>;
+  return (
+    <>
+      <SearchBar />
+    </>
+  );
 }
 
 export default SearchForm;
