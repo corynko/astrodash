@@ -16,7 +16,7 @@ import Contact from "./pages/Contact";
 
 //mui imports
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
   //ALERT: You may want to minimize the theme while working on this codebase
   const theme = React.useMemo(
     () =>
-      createTheme({
+      createTheme(adaptV4Theme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           //dark mode
@@ -208,7 +208,7 @@ function App() {
           borderRadius: 20,
         },
         spacing: 8.25,
-      }),
+      })),
 
     [prefersDarkMode]
   );
@@ -216,14 +216,16 @@ function App() {
   return (
     <Router>
       <CssBaseline />
-      <ThemeProvider theme={theme}>
-        <Nav />
-        <Routes>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/*" element={<Home />} />
-        </Routes>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <Nav />
+          <Routes>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/*" element={<Home />} />
+          </Routes>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </Router>
   );
 }
