@@ -12,7 +12,7 @@ function SearchForm() {
     const encodedLocation = encodeURIComponent(location);
     const apiKey = process.env.REACT_APP_GEOAPIFY_API_KEY;
     const url = `https://api.geoapify.com/v1/geocode/search?text=${encodedLocation}&apiKey=${apiKey}`;
-    console.log(url); // This should now output the correct URL
+    // console.log(url); // This should now output the correct URL
 
     try {
       const response = await axios.get(url);
