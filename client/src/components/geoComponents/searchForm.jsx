@@ -29,7 +29,7 @@ const SearchForm = ({ setCurrentMoonPhase, setCurrentMoonIllumination }) => {
   const getWeatherData = async (lat, lon) => {
     const apiKey = process.env.REACT_APP_WEATHERAPI_KEY;
     const days = 7; // x-day forecast
-    const url = `http://api.weatherapi.com/v1/forecast.json`;
+    const url = `https://api.weatherapi.com/v1/forecast.json`;
 
     try {
       const response = await axios.get(url, {
