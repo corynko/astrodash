@@ -4,11 +4,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 
-function SearchForm() {
+const SearchForm = ({ setCurrentMoonPhase, setCurrentMoonIllumination }) => {
   const [location, setLocation] = useState("");
-  const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecast, setForecast] = useState(null);
-  const [astronomy, setAstronomy] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState();
+  const [forecast, setForecast] = useState();
+  const [astronomy, setAstronomy] = useState();
 
   const handleLocationSearch = async (event) => {
     event.preventDefault();
@@ -42,17 +42,24 @@ function SearchForm() {
         },
       });
 
-      console.log(response.data);
+      //   console.log(response.data);
 
       //   set weather api response in state for use in front end components
       setCurrentWeather(response.data.current);
       setForecast(response.data.forecast.forecastday);
       setAstronomy(response.data.forecast.forecastday[0].astro);
+      setCurrentMoonPhase(
+        response.data.forecast.forecastday[0].astro.moon_phase
+      );
+      setCurrentMoonIllumination(
+        response.data.forecast.forecastday[0].astro.moon_illumination
+      );
 
       //   verification console.logs
-      console.log(currentWeather);
-      console.log(forecast);
-      console.log(astronomy);
+      //   console.log(currentWeather);
+      //   console.log(forecast);
+      //   console.log(astronomy);
+      //   console.log(response.data);
     } catch (error) {
       //TODO: add error state to UI
       console.error("Error fetching weather data:", error);
@@ -75,6 +82,6 @@ function SearchForm() {
       </IconButton>
     </form>
   );
-}
+};
 
 export default SearchForm;

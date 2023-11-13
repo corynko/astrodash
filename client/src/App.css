@@ -209,3 +209,14 @@
   display: flex;
   margin: 25px 15px 15px 15px;
 }
+
+.moonImg {
+  height: 100px;
+  width: 100px;
+}
+
+.profileText {
+  color: var(--darkwhite);
+  font-size: 70%;
+  font-family: "GothamLight";
+}
