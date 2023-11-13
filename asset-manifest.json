@@ -1,21 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.1c6eb8c3.css",
-    "main.js": "/static/js/main.9c559f23.js",
-    "static/js/787.164816f5.chunk.js": "/static/js/787.164816f5.chunk.js",
+    "main.css": "/static/css/main.a11c33f3.css",
+    "main.js": "/static/js/main.a9c8f646.js",
+    "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
     "static/media/astrodash_contact_cover_ahasanara_akter.jpg": "/static/media/astrodash_contact_cover_ahasanara_akter.4ec168e1f7121eba19f9.jpg",
     "static/media/astrodash_home_cover_marcelo_maturana.jpg": "/static/media/astrodash_home_cover_marcelo_maturana.9d8f3913968fe7195ec2.jpg",
     "static/media/astrodash_profile_cover_pixabay-41951.jpg": "/static/media/astrodash_profile_cover_pixabay-41951.7b3c3786a988cb4d2996.jpg",
     "static/media/GothamBook.ttf": "/static/media/GothamBook.58fb9151c57e59668f17.ttf",
     "static/media/Gotham-Thin.otf": "/static/media/Gotham-Thin.6447770f7eb4c8885d73.otf",
     "static/media/Gotham-Light.otf": "/static/media/Gotham-Light.59aa40045d8df0b87a73.otf",
+    "static/media/full_moon_trans.png": "/static/media/full_moon_trans.3bcb10a40187cc67cb60.png",
+    "static/media/new_moon_trans.png": "/static/media/new_moon_trans.5aba184cc8850d8479ba.png",
+    "static/media/waxing_crescent_trans.png": "/static/media/waxing_crescent_trans.de2198b09388201a633e.png",
+    "static/media/waning_gibbous_trans.png": "/static/media/waning_gibbous_trans.1c74604394a7525843a0.png",
+    "static/media/waning_crescent_trans.png": "/static/media/waning_crescent_trans.cc665c1271463601f87b.png",
     "index.html": "/index.html",
-    "main.1c6eb8c3.css.map": "/static/css/main.1c6eb8c3.css.map",
-    "main.9c559f23.js.map": "/static/js/main.9c559f23.js.map",
-    "787.164816f5.chunk.js.map": "/static/js/787.164816f5.chunk.js.map"
+    "main.a11c33f3.css.map": "/static/css/main.a11c33f3.css.map",
+    "main.a9c8f646.js.map": "/static/js/main.a9c8f646.js.map",
+    "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c6eb8c3.css",
-    "static/js/main.9c559f23.js"
+    "static/css/main.a11c33f3.css",
+    "static/js/main.a9c8f646.js"
   ]
 }
