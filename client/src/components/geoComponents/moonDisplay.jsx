@@ -55,7 +55,7 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
       animate="finished"
       className="flex column m25 center"
     >
-      <h4 className="profileText">
+      <h4 className="profileText textCenter">
         the moon is currently a {moonPhase.toLowerCase()}
       </h4>
       <img
@@ -63,7 +63,9 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
         src={phaseImage}
         alt="{`Moon phase: ${moonPhase}`}"
       />
-      <h4 className="profileText">it is {moonIllumination}% illuminated</h4>
+      <h4 className="profileText textCenter">
+        it is {moonIllumination}% illuminated
+      </h4>
     </motion.div>
   );
 };
