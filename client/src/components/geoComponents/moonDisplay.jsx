@@ -53,9 +53,11 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
       variants={divVariants}
       initial="start"
       animate="finished"
-      className="flex column center"
+      className="flex column m25 center"
     >
-      <h4 className="profileText">the moon is currently a {moonPhase}</h4>
+      <h4 className="profileText">
+        the moon is currently a {moonPhase.toLowerCase()}
+      </h4>
       <img
         className="moonImg"
         src={phaseImage}
