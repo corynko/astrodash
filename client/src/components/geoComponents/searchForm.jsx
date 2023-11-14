@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 
+//TODO: Add some form of visual indication that the result is loading upon button click
 const SearchForm = ({
   setCurrentMoonPhase,
   setCurrentMoonIllumination,
@@ -13,6 +14,7 @@ const SearchForm = ({
   setCurrentLocationName,
   setCurrentLocationRegion,
   setCurrentLocationCountry,
+  setIsDay,
 }) => {
   const [location, setLocation] = useState("");
   const [currentWeather, setCurrentWeather] = useState();
@@ -28,7 +30,7 @@ const SearchForm = ({
     try {
       const response = await axios.get(url);
       const coords = response.data.features[0].geometry.coordinates;
-      console.log(coords); // Do something with the coordinates
+      console.log(coords);
       getWeatherData(coords[1], coords[0]);
     } catch (error) {
       console.error("Error fetching geocode data:", error);
@@ -36,6 +38,13 @@ const SearchForm = ({
   };
 
   const getWeatherData = async (lat, lon) => {
+    const isDayTime = (localtime) => {
+      // Extract the hour from the localtime string
+      const hour = parseInt(localtime.split(" ")[1].split(":")[0], 10);
+      // Check if the hour is between 6 AM (06:00) and 6 PM (18:00)
+      return hour >= 6 && hour < 18;
+    };
+
     const apiKey = process.env.REACT_APP_WEATHERAPI_KEY;
     const days = 7; // x-day forecast
     const url = `https://api.weatherapi.com/v1/forecast.json`;
@@ -50,8 +59,6 @@ const SearchForm = ({
           alerts: "no",
         },
       });
-
-      //   console.log(response.data);
 
       //   set weather api response in state for use in front end components
       setCurrentLocationName(response.data.location.name);
@@ -69,6 +76,11 @@ const SearchForm = ({
       setCurrentConditionCode(response.data.current.condition.code);
       setCurrentConditionText(response.data.current.condition.text);
       setCurrentTemp(response.data.current.feelslike_f);
+
+      //check if localTime is during day or night to pass to forecast's current weather
+      const localTime = response.data.location.localtime;
+      // set result of daytime check in state
+      setIsDay(isDayTime(localTime));
 
       //   verification console.logs
       //   console.log(currentWeather);

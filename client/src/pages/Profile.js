@@ -16,6 +16,7 @@ export default function Profile() {
   const [chanceOfSnow, setChanceOfSnow] = useState("");
   const [currentConditionCode, setCurrentConditionCode] = useState("");
   const [currentConditionText, setCurrentConditionText] = useState("");
+  const [isDay, setIsDay] = useState("");
 
   let divVariants = {
     start: { opacity: 0 },
@@ -45,6 +46,7 @@ export default function Profile() {
           setCurrentLocationName={setCurrentLocationName}
           setCurrentLocationRegion={setCurrentLocationRegion}
           setCurrentLocationCountry={setCurrentLocationCountry}
+          setIsDay={setIsDay}
           setCurrentMoonPhase={setCurrentMoonPhase}
           setCurrentMoonIllumination={setCurrentMoonIllumination}
           setCurrentTemp={setCurrentTemp}
@@ -78,6 +80,7 @@ export default function Profile() {
               currentTemp={currentTemp}
               chanceOfRain={chanceOfRain}
               chanceOfSnow={chanceOfSnow}
+              isDay={isDay}
             />
           )}
         </div>
