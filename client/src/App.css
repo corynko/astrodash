@@ -180,7 +180,7 @@
 
 .profileCoverImg {
   background-color: rgba(0, 0, 0, 0.1);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("./assets/png/astrodash_profile_cover_pixabay-41951.jpg");
 }
 
@@ -211,6 +211,10 @@
 }
 
 .moonImg {
+  height: 100px;
+  width: 100px;
+}
+.conditionImg {
   height: 100px;
   width: 100px;
 }

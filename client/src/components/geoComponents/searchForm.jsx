@@ -4,7 +4,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 
-const SearchForm = ({ setCurrentMoonPhase, setCurrentMoonIllumination }) => {
+const SearchForm = ({
+  setCurrentMoonPhase,
+  setCurrentMoonIllumination,
+  setCurrentTemp,
+  setCurrentConditionCode,
+  setCurrentConditionText,
+  setCurrentLocationName,
+  setCurrentLocationRegion,
+  setCurrentLocationCountry,
+}) => {
   const [location, setLocation] = useState("");
   const [currentWeather, setCurrentWeather] = useState();
   const [forecast, setForecast] = useState();
@@ -45,6 +54,9 @@ const SearchForm = ({ setCurrentMoonPhase, setCurrentMoonIllumination }) => {
       //   console.log(response.data);
 
       //   set weather api response in state for use in front end components
+      setCurrentLocationName(response.data.location.name);
+      setCurrentLocationRegion(response.data.location.region);
+      setCurrentLocationCountry(response.data.location.country);
       setCurrentWeather(response.data.current);
       setForecast(response.data.forecast.forecastday);
       setAstronomy(response.data.forecast.forecastday[0].astro);
@@ -54,12 +66,15 @@ const SearchForm = ({ setCurrentMoonPhase, setCurrentMoonIllumination }) => {
       setCurrentMoonIllumination(
         response.data.forecast.forecastday[0].astro.moon_illumination
       );
+      setCurrentConditionCode(response.data.current.condition.code);
+      setCurrentConditionText(response.data.current.condition.text);
+      setCurrentTemp(response.data.current.feelslike_f);
 
       //   verification console.logs
       //   console.log(currentWeather);
       //   console.log(forecast);
       //   console.log(astronomy);
-      //   console.log(response.data);
+      console.log(response.data);
     } catch (error) {
       //TODO: add error state to UI
       console.error("Error fetching weather data:", error);
