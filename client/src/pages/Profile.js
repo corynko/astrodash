@@ -34,10 +34,10 @@ export default function Profile() {
   return (
     <div className="flex column center relative coverPage profileCoverImg">
       {!currentLocationName && (
-        <h1 className="homeHeader stroke25">your dashBoard</h1>
+        <h1 className="homeHeader textCenter stroke25">your dashBoard</h1>
       )}
       {!currentLocationName && (
-        <h4 className="homeHeader m25 stroke25">
+        <h4 className="homeHeader m25 textCenter stroke25">
           get started with a weather forecast using the search bar below
         </h4>
       )}
@@ -61,6 +61,7 @@ export default function Profile() {
             initial="start"
             animate="finished"
             style={{ color: "white" }}
+            className="textCenter"
           >
             {currentLocationName}, {currentLocationRegion},{" "}
             {currentLocationCountry}

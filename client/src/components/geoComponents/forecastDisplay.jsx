@@ -92,9 +92,13 @@ function ForecastDisplay({ conditionCode, conditionText, currentTemp, isDay }) {
       variants={divVariants}
       className="flex column m25 center"
     >
-      <h4 className="profileText">it feels like {currentTemp}° fahrenheit</h4>
+      <h4 className="profileText textCenter">
+        it feels like {currentTemp}° fahrenheit
+      </h4>
       <WeatherCondition code={conditionCode} isDay={isDay} />
-      <h4 className="profileText">right now, it's {conditionTextLower}</h4>
+      <h4 className="profileText textCenter">
+        right now, it's {conditionTextLower}
+      </h4>
     </motion.div>
   );
 }
