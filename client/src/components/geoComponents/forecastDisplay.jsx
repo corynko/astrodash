@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import WeatherContext from "../../contexts/WeatherContext";
 import { motion } from "framer-motion";
 
 // weather condition icon imports
@@ -7,69 +9,81 @@ import partlyCloudyDay from "../../assets/png/weatherCondition/partly_cloud_day_
 import partlyCloudyNight from "../../assets/png/weatherCondition/partly_cloudy_night_trans.png";
 import cloudy from "../../assets/png/weatherCondition/cloudy_trans.png";
 import rainy from "../../assets/png/weatherCondition/rainy_trans.png";
-import snowing from "../../assets/png/weatherCondition/snowing_trans.png";
+import snowy from "../../assets/png/weatherCondition/snowing_trans.png";
 
-const WeatherCondition = ({ code, isDay }) => {
-  const getImageForCondition = (conditionCode, dayTime) => {
-    // Day time conditions
+const WeatherCondition = ({ isDay }) => {
+  const { weatherData } = useContext(WeatherContext);
+  const conditionCode = weatherData?.current.condition.code;
+
+  const getImageForCondition = (code, dayTime) => {
+    // console.log(isDay);
+
+    // day time conditions
     const dayConditions = {
       1000: sunny, // Sunny
       1003: partlyCloudyDay, // Partly Cloudy
-      1009: partlyCloudyDay, // Partly Cloudy
+      1009: cloudy, // Overcast
       1030: partlyCloudyDay, // Partly Cloudy
       1006: cloudy, // Cloudy
     };
 
-    // Night time conditions
+    // night time conditions
     const nightConditions = {
       1000: clear, // Clear
       1003: partlyCloudyNight, // Partly Cloudy
-      1009: partlyCloudyNight, // Partly Cloudy
+      1009: cloudy, // Overcast
       1030: partlyCloudyNight, // Partly Cloudy
       1006: cloudy, // Cloudy
     };
 
-    // Rainy conditions can be same for day and night
+    // rainy conditions can be same for day and night
     const rainyConditions = [
       1063, 1180, 1183, 1186, 1189, 1192, 1195, 1240, 1243, 1246, 1273, 1276,
       1279,
     ];
 
-    // Snowy conditions can be same for day and night
+    // snowy conditions can be same for day and night
     const snowyConditions = [
       1066, 1114, 1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258,
     ];
 
-    // Check for rainy conditions
-    if (rainyConditions.includes(conditionCode)) {
+    // check for rainy conditions
+    if (rainyConditions.includes(code)) {
       return rainy;
     }
 
-    // Check for snowy conditions
-    if (snowyConditions.includes(conditionCode)) {
-      return snowing;
+    // check for snowy conditions
+    if (snowyConditions.includes(code)) {
+      return snowy;
     }
 
-    // Use the appropriate condition object based on day or night
+    // use the appropriate condition object based on day or night
     const conditions = dayTime ? dayConditions : nightConditions;
 
-    // Return the icon based on the condition code, or a default icon if not found
-    return conditions[conditionCode] || (dayTime ? sunny : clear);
+    // return the icon based on the condition code, or a default icon if not found
+    const conditionImage = conditions[code] || (dayTime ? sunny : clear);
+    // console.log(isDay, code, conditionImage); // Log to see if everything is working correctly
+    return conditionImage;
   };
 
-  const conditionImage = getImageForCondition(code, isDay);
-  //   console.log(isDay, code, conditionImage); // Log to see if everything is working correctly
+  const conditionImage = getImageForCondition(conditionCode, isDay);
 
   return (
     <img
       className="conditionImg"
       src={conditionImage}
-      alt={`Weather condition: `}
+      alt={`Weather condition: ${conditionCode}`}
     />
   );
 };
 
-function ForecastDisplay({ conditionCode, conditionText, currentTemp, isDay }) {
+function ForecastDisplay({ isDay }) {
+  const { weatherData } = useContext(WeatherContext);
+  if (!weatherData) return null;
+  const conditionText = weatherData?.current.condition.text;
+  const currentTemp = weatherData?.current.feelslike_f;
+
+  if (!weatherData) return null;
   let divVariants = {
     start: { opacity: 0 },
     finished: {
@@ -95,7 +109,7 @@ function ForecastDisplay({ conditionCode, conditionText, currentTemp, isDay }) {
       <h4 className="profileText textCenter">
         it feels like {currentTemp}° fahrenheit
       </h4>
-      <WeatherCondition code={conditionCode} isDay={isDay} />
+      <WeatherCondition isDay={isDay} />
       <h4 className="profileText textCenter">
         right now, it's {conditionTextLower}
       </h4>
