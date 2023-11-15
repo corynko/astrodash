@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import WeatherContext from "../../contexts/WeatherContext";
 import { motion } from "framer-motion";
 
 //moon phase png imports
@@ -10,8 +12,13 @@ import WaningGibbous from "../../assets/png/moons/waning_gibbous_trans.png";
 import ThirdQuarter from "../../assets/png/moons/third_quarter_trans.png";
 import WaningCrescent from "../../assets/png/moons/waning_crescent_trans.png";
 
-const MoonDisplay = ({ moonPhase, moonIllumination }) => {
+const MoonDisplay = () => {
+  const { weatherData } = useContext(WeatherContext);
+  const moonPhase = weatherData?.forecast.forecastday[0].astro.moon_phase;
+  const moonIllumination =
+    weatherData?.forecast.forecastday[0].astro.moon_illumination;
   //   console.log(moonPhase, moonIllumination);
+
   const getImageForPhase = (phase) => {
     switch (phase) {
       case "New Moon":

@@ -1,25 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import WeatherContext from "../../contexts/WeatherContext";
 
 //TODO: Add some form of visual indication that the result is loading upon button click
-const SearchForm = ({
-  setCurrentMoonPhase,
-  setCurrentMoonIllumination,
-  setCurrentTemp,
-  setCurrentConditionCode,
-  setCurrentConditionText,
-  setCurrentLocationName,
-  setCurrentLocationRegion,
-  setCurrentLocationCountry,
-  setIsDay,
-}) => {
+const SearchForm = ({ setIsDay }) => {
+  const { weatherData, setWeatherData } = useContext(WeatherContext);
   const [location, setLocation] = useState("");
-  const [currentWeather, setCurrentWeather] = useState();
-  const [forecast, setForecast] = useState();
-  const [astronomy, setAstronomy] = useState();
 
   const handleLocationSearch = async (event) => {
     event.preventDefault();
@@ -39,10 +28,10 @@ const SearchForm = ({
 
   const getWeatherData = async (lat, lon) => {
     const isDayTime = (localtime) => {
-      // Extract the hour from the localtime string
+      // extract the hour from the localtime string
       const hour = parseInt(localtime.split(" ")[1].split(":")[0], 10);
-      // Check if the hour is between 6 AM (06:00) and 6 PM (18:00)
-      return hour >= 6 && hour < 18;
+      // check if the hour is between 5 AM (06:00) and 6 PM (18:00)
+      return hour >= 5 && hour < 18;
     };
 
     const apiKey = process.env.REACT_APP_WEATHERAPI_KEY;
@@ -60,25 +49,12 @@ const SearchForm = ({
         },
       });
 
-      //   set weather api response in state for use in front end components
-      setCurrentLocationName(response.data.location.name);
-      setCurrentLocationRegion(response.data.location.region);
-      setCurrentLocationCountry(response.data.location.country);
-      setCurrentWeather(response.data.current);
-      setForecast(response.data.forecast.forecastday);
-      setAstronomy(response.data.forecast.forecastday[0].astro);
-      setCurrentMoonPhase(
-        response.data.forecast.forecastday[0].astro.moon_phase
-      );
-      setCurrentMoonIllumination(
-        response.data.forecast.forecastday[0].astro.moon_illumination
-      );
-      setCurrentConditionCode(response.data.current.condition.code);
-      setCurrentConditionText(response.data.current.condition.text);
-      setCurrentTemp(response.data.current.feelslike_f);
+      //   sets entire object response into weatherData context state
+      setWeatherData(response.data);
 
       //check if localTime is during day or night to pass to forecast's current weather
       const localTime = response.data.location.localtime;
+
       // set result of daytime check in state
       setIsDay(isDayTime(localTime));
 
@@ -86,12 +62,14 @@ const SearchForm = ({
       //   console.log(currentWeather);
       //   console.log(forecast);
       //   console.log(astronomy);
-      console.log(response.data);
+
+      //   console.log(response.data);
     } catch (error) {
       //TODO: add error state to UI
       console.error("Error fetching weather data:", error);
     }
   };
+  //   console.log(weatherData);
 
   return (
     <form onSubmit={handleLocationSearch}>
