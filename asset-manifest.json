@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5c0f0011.css",
-    "main.js": "/static/js/main.df4cc92a.js",
+    "main.js": "/static/js/main.736c8b3e.js",
     "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
     "static/media/astrodash_contact_cover_ahasanara_akter.jpg": "/static/media/astrodash_contact_cover_ahasanara_akter.4ec168e1f7121eba19f9.jpg",
     "static/media/astrodash_home_cover_marcelo_maturana.jpg": "/static/media/astrodash_home_cover_marcelo_maturana.9d8f3913968fe7195ec2.jpg",
@@ -23,11 +23,11 @@
     "static/media/waning_crescent_trans.png": "/static/media/waning_crescent_trans.cc665c1271463601f87b.png",
     "index.html": "/index.html",
     "main.5c0f0011.css.map": "/static/css/main.5c0f0011.css.map",
-    "main.df4cc92a.js.map": "/static/js/main.df4cc92a.js.map",
+    "main.736c8b3e.js.map": "/static/js/main.736c8b3e.js.map",
     "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5c0f0011.css",
-    "static/js/main.df4cc92a.js"
+    "static/js/main.736c8b3e.js"
   ]
 }
