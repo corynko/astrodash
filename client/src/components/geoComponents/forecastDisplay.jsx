@@ -23,7 +23,7 @@ const WeatherCondition = ({ isDay }) => {
       1000: sunny, // Sunny
       1003: partlyCloudyDay, // Partly Cloudy
       1009: cloudy, // Overcast
-      1030: partlyCloudyDay, // Partly Cloudy
+      1030: partlyCloudyDay, // Mist
       1006: cloudy, // Cloudy
     };
 
@@ -32,7 +32,7 @@ const WeatherCondition = ({ isDay }) => {
       1000: clear, // Clear
       1003: partlyCloudyNight, // Partly Cloudy
       1009: cloudy, // Overcast
-      1030: partlyCloudyNight, // Partly Cloudy
+      1030: partlyCloudyNight, // Mist
       1006: cloudy, // Cloudy
     };
 
