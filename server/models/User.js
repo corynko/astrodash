@@ -18,6 +18,18 @@ User.init(
             allowNull: false,
             primaryKey: true,
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        phone: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: true,
+            validate: {
+                is: /^\d{10,}$/i, // regex for 10 digits
+            }
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -37,14 +49,6 @@ User.init(
                     }
                 }
             }
-        },
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        lastName: {
-            type: DataTypes.STRING,
-            allowNull: true, 
         },
     },
     {
