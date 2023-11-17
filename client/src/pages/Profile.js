@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { WeatherProvider } from "../contexts/WeatherContext";
 import SearchForm from "../components/geoComponents/searchForm";
 import MoonDisplay from "../components/geoComponents/moonDisplay";
-import ForecastDisplay from "../components/geoComponents/forecastDisplay";
+import ConditionDisplay from "../components/geoComponents/currentConditionDisplay";
 
 export default function Profile() {
   const [isDay, setIsDay] = useState("");
@@ -54,7 +54,7 @@ export default function Profile() {
           )}
           <div className="flex center">
             {weatherData && <MoonDisplay />}
-            {weatherData && <ForecastDisplay isDay={isDay} />}
+            {weatherData && <ConditionDisplay isDay={isDay} />}
           </div>
         </div>
       </div>

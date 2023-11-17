@@ -77,7 +77,7 @@ const WeatherCondition = ({ isDay }) => {
   );
 };
 
-function ForecastDisplay({ isDay }) {
+function ConditionDisplay({ isDay }) {
   const { weatherData } = useContext(WeatherContext);
   if (!weatherData) return null;
   const conditionText = weatherData?.current.condition.text;
@@ -117,4 +117,4 @@ function ForecastDisplay({ isDay }) {
   );
 }
 
-export default ForecastDisplay;
+export default ConditionDisplay;
