@@ -18,6 +18,18 @@ User.init(
             allowNull: false,
             primaryKey: true,
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        phone: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: true,
+            validate: {
+                is: /^\d{10,}$/i, // regex for 10 digits
+            }
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -33,18 +45,10 @@ User.init(
                 isStrongPassword: function (value) {
                     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
                     if (!strongPasswordRegex.test(value)) {
-                        throw new Error('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.');
+                        throw new Error('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character, and 8 characters long.');
                     }
                 }
             }
-        },
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        lastName: {
-            type: DataTypes.STRING,
-            allowNull: true, 
         },
     },
     {
