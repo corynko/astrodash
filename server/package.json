@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "watch": "nodemon app.js"
+    "watch": "nodemon app.js",
+    "seed": "node seeds/index.js"
   },
   "dependencies": {
     "axios": "^1.6.1",

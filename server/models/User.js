@@ -45,7 +45,7 @@ User.init(
                 isStrongPassword: function (value) {
                     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
                     if (!strongPasswordRegex.test(value)) {
-                        throw new Error('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.');
+                        throw new Error('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character, and 8 characters long.');
                     }
                 }
             }
