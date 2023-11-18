@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 9000;
 
 
 // Middleware setup
-app.use(cors());
-app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors({origin: 'http://localhost:3000'}));
+app.use(cookieParser());
+// app.use(express.urlencoded({ extended: true }));
 app.use(require("./controller"));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(authenticateToken);
+app.use(['/api/profile'], authenticateToken);
 
 
 // Error handling
