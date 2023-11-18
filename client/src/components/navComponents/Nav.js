@@ -11,7 +11,6 @@ import NavItemsDesktop from "./desktop/navItemsDesktop";
 export default function Nav() {
   return (
     <AppBar
-      position="static"
       className="appBar"
       style={{ background: "transparent", boxShadow: "none" }}
     >
