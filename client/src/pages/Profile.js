@@ -1,9 +1,11 @@
-import { useState } from "react";
+import AppBarHeightContext from "../contexts/AppBarHeightContext";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 
 import { WeatherProvider } from "../contexts/WeatherContext";
 import SearchForm from "../components/geoComponents/searchForm";
 import MoonDisplay from "../components/geoComponents/moonDisplay";
+import ConditionDisplay from "../components/geoComponents/currentConditionDisplay";
 import ForecastDisplay from "../components/geoComponents/forecastDisplay";
 
 export default function Profile() {
@@ -12,6 +14,11 @@ export default function Profile() {
   const currentLocationName = weatherData?.location.name;
   const currentLocationRegion = weatherData?.location.region;
   const currentLocationCountry = weatherData?.location.country;
+
+  const appBarHeight = useContext(AppBarHeightContext);
+  const coverPageStyle = {
+    minHeight: `calc(100vh - ${appBarHeight}px - 150px)`,
+  };
 
   let divVariants = {
     start: { opacity: 0 },
@@ -28,36 +35,43 @@ export default function Profile() {
   console.log(weatherData);
 
   return (
-    <WeatherProvider value={{ weatherData, setWeatherData }}>
-      <div className="flex column center relative coverPage profileCoverImg">
-        {!currentLocationName && (
-          <h1 className="homeHeader textCenter stroke25">your dashBoard</h1>
-        )}
-        {!currentLocationName && (
-          <h4 className="homeHeader m25 textCenter stroke25">
-            get started with a weather forecast using the search bar below
-          </h4>
-        )}
-        <div className="flex column center">
-          <SearchForm setIsDay={setIsDay} />
-          {currentLocationName && (
-            <motion.h2
-              variants={divVariants}
-              initial="start"
-              animate="finished"
-              style={{ color: "white" }}
-              className="textCenter"
-            >
-              {currentLocationName}, {currentLocationRegion},{" "}
-              {currentLocationCountry}
-            </motion.h2>
+    <>
+      <div className="profileCoverImg" />
+      <WeatherProvider value={{ weatherData, setWeatherData }}>
+        <div
+          className="flex column center profileCoverPage"
+          style={coverPageStyle}
+        >
+          {!currentLocationName && (
+            <h1 className="homeHeader textCenter stroke25">your dashBoard</h1>
           )}
-          <div className="flex center">
-            {weatherData && <MoonDisplay />}
-            {weatherData && <ForecastDisplay isDay={isDay} />}
+          {!currentLocationName && (
+            <h4 className="homeHeader m25 textCenter stroke25">
+              get started with a weather forecast using the search bar below
+            </h4>
+          )}
+          <div className="flex column center">
+            <SearchForm setIsDay={setIsDay} />
+            {currentLocationName && (
+              <motion.h2
+                variants={divVariants}
+                initial="start"
+                animate="finished"
+                style={{ color: "#dde2f8" }}
+                className="textCenter"
+              >
+                {currentLocationName}, {currentLocationRegion},{" "}
+                {currentLocationCountry}
+              </motion.h2>
+            )}
+            <div className="flex center">
+              {weatherData && <MoonDisplay />}
+              {weatherData && <ConditionDisplay isDay={isDay} />}
+            </div>
+            {weatherData && <ForecastDisplay />}
           </div>
         </div>
-      </div>
-    </WeatherProvider>
+      </WeatherProvider>
+    </>
   );
 }

@@ -1,8 +1,14 @@
-import { useTheme } from "@mui/material/styles";
+import AppBarHeightContext from "../contexts/AppBarHeightContext";
+import { useContext, useState } from "react";
 import Sparkles from "react-sparkle";
 import { motion } from "framer-motion";
 
 export default function Home() {
+  const appBarHeight = useContext(AppBarHeightContext);
+  const coverPageStyle = {
+    minHeight: `calc(100vh - ${appBarHeight}px - 150px)`,
+  };
+
   let divVariants = {
     start: { opacity: 0 },
     finished: {
@@ -17,30 +23,34 @@ export default function Home() {
   };
 
   return (
-    <div className="flex column center relative coverPage homeCoverImg">
-      <Sparkles
-        count={18}
-        minSize={2}
-        maxSize={8}
-        overflowPx={0}
-        fadeOutSpeed={3}
-        flicker={true}
-        flickerSpeed={"slowest"}
-      />
-      <motion.div
-        className="textCenter"
-        variants={divVariants}
-        initial="start"
-        animate="finished"
-      >
-        <h1 className="homeHeader m25 p75">welcome to astroDash</h1>
-        <h3 className="homeHeader m25">
-          astroDash makes it easy to plan a shoot
-        </h3>
-        <h4 className="homeHeader m25">
-          aggregate forecast data, AR landscape images, and more in one place
-        </h4>
-      </motion.div>
-    </div>
+    <>
+      <div className="homeCoverImg">
+        <Sparkles
+          count={18}
+          minSize={2}
+          maxSize={8}
+          overflowPx={0}
+          fadeOutSpeed={3}
+          flicker={true}
+          flickerSpeed={"slowest"}
+        />
+      </div>
+      <div className="flex column center coverPage" style={coverPageStyle}>
+        <motion.div
+          className="textCenter"
+          variants={divVariants}
+          initial="start"
+          animate="finished"
+        >
+          <h1 className="homeHeader m25 p75">welcome to astroDash</h1>
+          <h3 className="homeHeader m25">
+            astroDash makes it easy to plan a shoot
+          </h3>
+          <h4 className="homeHeader m25">
+            aggregate forecast data, AR landscape images, and more in one place
+          </h4>
+        </motion.div>
+      </div>
+    </>
   );
 }
