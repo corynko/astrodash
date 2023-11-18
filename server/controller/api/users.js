@@ -5,20 +5,12 @@ require('dotenv').config();
 // const verifyToken = require('../../utils/auth');
 // const authenticateToken = require('../../utils/auth');
 
-// GET all users
-router.get('/', async (req, res) => {
-  try {
-    const userData = await User.findAll();
-    res.status(200).json(userData);
-  } catch(err) {
-    res.status(500).json(err);
-  }
-});
-
 router.post('/signup', async (req, res) => {
   try {
     console.log("Enetered try block");
     console.log(req.body);
+
+    // Create a new user
     const userData = await User.create(
       {
         name: req.body.name,
@@ -27,7 +19,15 @@ router.post('/signup', async (req, res) => {
         password: req.body.password,
       }
     );
-    res.status(201).json(userData);
+    
+    // Create a token for the new user
+    const token = jwt.sign({ userId: userData.id }, secretKey, { expiresIn: '1h' });
+
+    // Set the token as a cookie
+    res.cookie('token', token, { httpOnly: true });
+
+    //respond with the token and the userData. 
+    res.status(201).json({ userData, token });
   } catch(err) {
     res.status(400).json(err); 
   }
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: userData.id, email: userData.email }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
 
     // set the token as a cookie
-    res.cookie('token', token, { httpOnly: true });
+    res.cookie('token', token, { httpOnly: true, secure: false });
 
     // Respond with user data or a success message
     res.status(200).json(userData);
