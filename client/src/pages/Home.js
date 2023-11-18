@@ -18,8 +18,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="homeCoverImg" />
-      <div className="flex column center coverPage">
+      <div className="homeCoverImg">
         <Sparkles
           count={18}
           minSize={2}
@@ -29,6 +28,8 @@ export default function Home() {
           flicker={true}
           flickerSpeed={"slowest"}
         />
+      </div>
+      <div className="flex column center coverPage">
         <motion.div
           className="textCenter"
           variants={divVariants}
