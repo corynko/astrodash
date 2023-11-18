@@ -1,4 +1,5 @@
-import { useState } from "react";
+import AppBarHeightContext from "../contexts/AppBarHeightContext";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 
 import { WeatherProvider } from "../contexts/WeatherContext";
@@ -14,7 +15,10 @@ export default function Profile() {
   const currentLocationRegion = weatherData?.location.region;
   const currentLocationCountry = weatherData?.location.country;
 
-  const paddingTopStyle = weatherData ? { paddingTop: "20vh" } : {};
+  const appBarHeight = useContext(AppBarHeightContext);
+  const coverPageStyle = {
+    minHeight: `calc(100vh - ${appBarHeight}px - 150px)`,
+  };
 
   let divVariants = {
     start: { opacity: 0 },
@@ -36,7 +40,7 @@ export default function Profile() {
       <WeatherProvider value={{ weatherData, setWeatherData }}>
         <div
           className="flex column center profileCoverPage"
-          style={paddingTopStyle}
+          style={coverPageStyle}
         >
           {!currentLocationName && (
             <h1 className="homeHeader textCenter stroke25">your dashBoard</h1>

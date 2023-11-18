@@ -1,8 +1,14 @@
-// import { useTheme } from "@mui/material/styles";
+import AppBarHeightContext from "../contexts/AppBarHeightContext";
+import { useContext, useState } from "react";
 import Sparkles from "react-sparkle";
 import { motion } from "framer-motion";
 
 export default function Home() {
+  const appBarHeight = useContext(AppBarHeightContext);
+  const coverPageStyle = {
+    minHeight: `calc(100vh - ${appBarHeight}px - 150px)`,
+  };
+
   let divVariants = {
     start: { opacity: 0 },
     finished: {
@@ -29,7 +35,7 @@ export default function Home() {
           flickerSpeed={"slowest"}
         />
       </div>
-      <div className="flex column center coverPage">
+      <div className="flex column center coverPage" style={coverPageStyle}>
         <motion.div
           className="textCenter"
           variants={divVariants}

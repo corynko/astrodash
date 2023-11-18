@@ -1,5 +1,6 @@
 //react imports
 import React, { useState, useEffect } from "react";
+import { AppBarHeight } from "./contexts/useAppBarHeight";
 
 //nav router
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
@@ -208,19 +209,21 @@ function App() {
   );
 
   return (
-    <Router>
-      <CssBaseline />
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <Nav />
-          <Routes>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/*" element={<Home />} />
-          </Routes>
-        </ThemeProvider>
-      </StyledEngineProvider>
-    </Router>
+    <AppBarHeight>
+      <Router>
+        <CssBaseline />
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <Nav />
+            <Routes>
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/*" element={<Home />} />
+            </Routes>
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </Router>
+    </AppBarHeight>
   );
 }
 

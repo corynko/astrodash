@@ -9,6 +9,8 @@ import FullLogoDesktop from "./desktop/fullLogoDesktop";
 import NavItemsDesktop from "./desktop/navItemsDesktop";
 
 export default function Nav() {
+  // const appBarHeight = useContext(AppBarHeightContext);
+
   return (
     <AppBar
       className="appBar"
