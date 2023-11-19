@@ -83,9 +83,62 @@ const WeatherCondition = ({ conditionCode }) => {
 };
 
 const MoonDisplay = ({ moonPhase, moonIllumination }) => {
-  //   console.log(moonPhase, moonIllumination);
+  const getImageForPhase = (phase, illumination) => {
+    const illum = parseInt(illumination, 10);
 
-  const getImageForPhase = (phase) => {
+    // waxing crescent
+    if (phase === "Waxing Crescent" && illum >= 10 && illum <= 40) {
+      return WaxingCrescent;
+    }
+
+    // waxing crescent, waxing gibbous, or first quarter between 40 and 60%
+    if (
+      (phase === "Waxing Crescent" ||
+        phase === "Waxing Gibbous" ||
+        phase === "First Quarter") &&
+      illum > 40 &&
+      illum <= 60
+    ) {
+      return FirstQuarter;
+    }
+
+    // waxing gibbous between 60 and 90%
+    if (phase === "Waxing Gibbous" && illum > 60 && illum < 90) {
+      return WaxingGibbous;
+    }
+
+    // full moon for >= 90%
+    if (illum >= 90) {
+      return FullMoon;
+    }
+
+    // waning gibbous between 60 and 90%
+    if (phase === "Waning Gibbous" && illum >= 60 && illum < 90) {
+      return WaningGibbous;
+    }
+
+    // waning gibbous, third quarter, or waning crescent between 40 and 60%
+    if (
+      (phase === "Waning Gibbous" ||
+        phase === "Third Quarter" ||
+        phase === "Waning Crescent") &&
+      illum > 40 &&
+      illum <= 60
+    ) {
+      return ThirdQuarter;
+    }
+
+    // waning crescent between 10 and 40%
+    if (phase === "Waning Crescent" && illum >= 10 && illum <= 40) {
+      return WaningCrescent;
+    }
+
+    // new moon for >= 0% and < 10%
+    if (illum >= 0 && illum < 10) {
+      return NewMoon;
+    }
+
+    // default to current moon phase if none of the above conditions are met
     switch (phase) {
       case "New Moon":
         return NewMoon;
@@ -107,7 +160,8 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
         return FullMoon;
     }
   };
-  const phaseImage = getImageForPhase(moonPhase);
+
+  const phaseImage = getImageForPhase(moonPhase, moonIllumination);
 
   return (
     <img
@@ -118,7 +172,31 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
   );
 };
 
-const ForecastDisplayCard = ({ day }) => {
+const ForecastDisplayCard = ({ day, isTomorrow }) => {
+  //date/day of week variables
+  const forecastDate = new Date(day.date + "T00:00:00");
+  const dayOfWeekIndex = forecastDate.getDay();
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const dayOfWeekName = isTomorrow ? "Tomorrow" : daysOfWeek[dayOfWeekIndex];
+  const dayOfWeekLower = dayOfWeekName.toLowerCase();
+  const dateOptions = { month: "long", day: "numeric" };
+  const dateWithoutYear = forecastDate.toLocaleDateString("en-US", dateOptions);
+  const dateWithoutYearLower = dateWithoutYear.toLowerCase();
+
+  //general weather variable
+  const conditionTextLower = day.day.condition.text.toLowerCase();
+  const moonIllumination = day.astro.moon_illumination;
+  const highTemp = day.day.maxtemp_f;
+  const lowTemp = day.day.mintemp_f;
+
   let divVariants = {
     start: { opacity: 0 },
     finished: {
@@ -141,6 +219,7 @@ const ForecastDisplayCard = ({ day }) => {
             paddingY: "10px",
             paddingX: "10px",
             backgroundColor: "#00000060",
+            minWidth: "300px",
           }}
         >
           <div className="flex between">
@@ -154,24 +233,25 @@ const ForecastDisplayCard = ({ day }) => {
             <Typography
               sx={{ fontSize: 14 }}
               color="text.secondary"
+              className="mobileColumn"
               gutterBottom
             >
-              Word of the Day
+              {conditionTextLower}, {moonIllumination}% illumination
             </Typography>
             <Typography variant="h5" component="div">
-              benevolent
+              {dayOfWeekLower}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              adjective
+              {dateWithoutYearLower}
             </Typography>
-            <Typography variant="body2">
-              well meaning and kindly.
+            <Typography variant="body1" sx={{ fontSize: 19 }}>
+              high temp: {highTemp}°f
               <br />
-              {'"a benevolent smile"'}
+              low temp: {lowTemp}°f
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Learn More</Button>
+            <Button size="small">view detailed forecast</Button>
           </CardActions>
         </Card>
       </div>
@@ -183,19 +263,25 @@ function ForecastDisplay() {
   const { weatherData } = useContext(WeatherContext);
   const forecastDays = weatherData?.forecast?.forecastday || [];
 
-  const firstRow = forecastDays.slice(1, 4);
-  const secondRow = forecastDays.slice(4, 7);
+  const slicedForecastDays = forecastDays.slice(1, 7);
+
+  const firstRow = slicedForecastDays.slice(0, 3);
+  const secondRow = slicedForecastDays.slice(3, 6);
 
   return (
     <div>
-      <div className="flex wrap between m25 g25 mobileColumn">
+      <div className="flex wrap between m25 g25 wideMobileColumn">
         {firstRow.map((day, index) => (
-          <ForecastDisplayCard key={index} day={day} />
+          <ForecastDisplayCard
+            key={day.date}
+            day={day}
+            isTomorrow={index === 0}
+          />
         ))}
       </div>
-      <div className="flex wrap between m25 g25 mobileColumn">
+      <div className="flex wrap between m25 g25 wideMobileColumn">
         {secondRow.map((day, index) => (
-          <ForecastDisplayCard key={index} day={day} />
+          <ForecastDisplayCard key={day.date} day={day} />
         ))}
       </div>
     </div>
