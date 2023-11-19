@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5c0f0011.css",
-    "main.js": "/static/js/main.736c8b3e.js",
+    "main.css": "/static/css/main.847ea18f.css",
+    "main.js": "/static/js/main.6a41c7b6.js",
     "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
     "static/media/astrodash_contact_cover_ahasanara_akter.jpg": "/static/media/astrodash_contact_cover_ahasanara_akter.4ec168e1f7121eba19f9.jpg",
     "static/media/astrodash_home_cover_marcelo_maturana.jpg": "/static/media/astrodash_home_cover_marcelo_maturana.9d8f3913968fe7195ec2.jpg",
@@ -18,16 +18,16 @@
     "static/media/sunny_trans.png": "/static/media/sunny_trans.da0047ad76cb81630a7b.png",
     "static/media/full_moon_trans.png": "/static/media/full_moon_trans.3bcb10a40187cc67cb60.png",
     "static/media/new_moon_trans.png": "/static/media/new_moon_trans.5aba184cc8850d8479ba.png",
-    "static/media/waxing_crescent_trans.png": "/static/media/waxing_crescent_trans.de2198b09388201a633e.png",
-    "static/media/waning_gibbous_trans.png": "/static/media/waning_gibbous_trans.1c74604394a7525843a0.png",
-    "static/media/waning_crescent_trans.png": "/static/media/waning_crescent_trans.cc665c1271463601f87b.png",
+    "static/media/waning_crescent_trans.png": "/static/media/waning_crescent_trans.de2198b09388201a633e.png",
+    "static/media/waxing_gibbous_trans.png": "/static/media/waxing_gibbous_trans.1c74604394a7525843a0.png",
+    "static/media/waxing_crescent_trans.png": "/static/media/waxing_crescent_trans.cc665c1271463601f87b.png",
     "index.html": "/index.html",
-    "main.5c0f0011.css.map": "/static/css/main.5c0f0011.css.map",
-    "main.736c8b3e.js.map": "/static/js/main.736c8b3e.js.map",
+    "main.847ea18f.css.map": "/static/css/main.847ea18f.css.map",
+    "main.6a41c7b6.js.map": "/static/js/main.6a41c7b6.js.map",
     "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c0f0011.css",
-    "static/js/main.736c8b3e.js"
+    "static/css/main.847ea18f.css",
+    "static/js/main.6a41c7b6.js"
   ]
 }
