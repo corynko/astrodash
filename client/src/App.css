@@ -239,6 +239,12 @@ body {
   font-family: "GothamLight";
 }
 
+@media (max-width: 1000px) {
+  .wideMobileColumn {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 800px) {
   .mobileColumn {
     flex-direction: column;

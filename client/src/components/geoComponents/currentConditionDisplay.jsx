@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import WeatherContext from "../../contexts/WeatherContext";
 import { motion } from "framer-motion";
+import { Button } from "@mui/material";
 
 // weather condition icon imports
 import sunny from "../../assets/png/weatherCondition/sunny_trans.png";

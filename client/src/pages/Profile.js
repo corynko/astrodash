@@ -1,6 +1,7 @@
 import AppBarHeightContext from "../contexts/AppBarHeightContext";
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
+import { Button } from "@mui/material";
 
 import { WeatherProvider } from "../contexts/WeatherContext";
 import SearchForm from "../components/geoComponents/searchForm";
@@ -68,6 +69,7 @@ export default function Profile() {
               {weatherData && <MoonDisplay />}
               {weatherData && <ConditionDisplay isDay={isDay} />}
             </div>
+            <Button sx={{ fontSize: "16px" }}>view today's forecast</Button>
             {weatherData && <ForecastDisplay />}
           </div>
         </div>
