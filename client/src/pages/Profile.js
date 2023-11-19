@@ -69,7 +69,9 @@ export default function Profile() {
               {weatherData && <MoonDisplay />}
               {weatherData && <ConditionDisplay isDay={isDay} />}
             </div>
-            <Button sx={{ fontSize: "16px" }}>view today's forecast</Button>
+            {weatherData && (
+              <Button sx={{ fontSize: "16px" }}>view today's forecast</Button>
+            )}
             {weatherData && <ForecastDisplay />}
           </div>
         </div>
