@@ -17,9 +17,63 @@ const MoonDisplay = () => {
   const moonPhase = weatherData?.forecast.forecastday[0].astro.moon_phase;
   const moonIllumination =
     weatherData?.forecast.forecastday[0].astro.moon_illumination;
-  //   console.log(moonPhase, moonIllumination);
 
-  const getImageForPhase = (phase) => {
+  const getImageForPhase = (phase, illumination) => {
+    const illum = parseInt(illumination, 10);
+
+    // waxing crescent
+    if (phase === "Waxing Crescent" && illum >= 10 && illum <= 40) {
+      return WaxingCrescent;
+    }
+
+    // waxing crescent, waxing gibbous, or first quarter between 40 and 60%
+    if (
+      (phase === "Waxing Crescent" ||
+        phase === "Waxing Gibbous" ||
+        phase === "First Quarter") &&
+      illum > 40 &&
+      illum <= 60
+    ) {
+      return FirstQuarter;
+    }
+
+    // waxing gibbous between 60 and 90%
+    if (phase === "Waxing Gibbous" && illum > 60 && illum < 90) {
+      return WaxingGibbous;
+    }
+
+    // full moon for >= 90%
+    if (illum >= 90) {
+      return FullMoon;
+    }
+
+    // waning gibbous between 60 and 90%
+    if (phase === "Waning Gibbous" && illum >= 60 && illum < 90) {
+      return WaningGibbous;
+    }
+
+    // waning gibbous, third quarter, or waning crescent between 40 and 60%
+    if (
+      (phase === "Waning Gibbous" ||
+        phase === "Third Quarter" ||
+        phase === "Waning Crescent") &&
+      illum > 40 &&
+      illum <= 60
+    ) {
+      return ThirdQuarter;
+    }
+
+    // waning crescent between 10 and 40%
+    if (phase === "Waning Crescent" && illum >= 10 && illum <= 40) {
+      return WaningCrescent;
+    }
+
+    // new moon for >= 0% and < 10%
+    if (illum >= 0 && illum < 10) {
+      return NewMoon;
+    }
+
+    // default to current moon phase if none of the above conditions are met
     switch (phase) {
       case "New Moon":
         return NewMoon;
@@ -41,7 +95,9 @@ const MoonDisplay = () => {
         return FullMoon;
     }
   };
-  const phaseImage = getImageForPhase(moonPhase);
+
+  const phaseImage = getImageForPhase(moonPhase, moonIllumination);
+
   let divVariants = {
     start: { opacity: 0 },
     finished: {
