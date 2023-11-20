@@ -8,7 +8,7 @@ const cors = require('cors');
 
 
 const app = express();
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 5000;
 
 
 // Middleware setup
@@ -29,6 +29,6 @@ app.use(['/api/profile'], authenticateToken);
 sequelize.sync({ force: false })
 .then(() => {
   app.listen(PORT, () => {
-    console.log(`Server listening on: http://localhost: ${PORT}`);
+    console.log(`Server listening on: http://localhost:${PORT}`);
   });
 });
