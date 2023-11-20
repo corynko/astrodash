@@ -21,6 +21,7 @@
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .largeLogo {
@@ -126,6 +127,11 @@ body {
 .m10 {
   margin: 10px;
 }
+
+.mTop25 {
+  margin: 25px;
+}
+
 .m25 {
   margin: 25px;
 }
