@@ -8,14 +8,14 @@ const cors = require('cors');
 
 
 const app = express();
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 5000;
 
 
 // Middleware setup
 app.use(express.json());
 app.use(cors({origin: 'http://localhost:3000'}));
 app.use(cookieParser());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(require("./controller"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(['/api/profile'], authenticateToken);
@@ -29,6 +29,6 @@ app.use(['/api/profile'], authenticateToken);
 sequelize.sync({ force: false })
 .then(() => {
   app.listen(PORT, () => {
-    console.log(`Server listening on: http://localhost: ${PORT}`);
+    console.log(`Server listening on: http://localhost:${PORT}`);
   });
 });

@@ -1,12 +1,23 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import emailjs from "emailjs-com";
-import http from "../../utils/http-common";
-import Cookie from "js-cookie";
+// import http from "../../utils/http-common";
+// import Cookie from "js-cookie";
+import axios, { AxiosResponse } from "axios";
 
 const SERVICE_ID = "service_egqlubp";
 const TEMPLATE_ID = "template_f9v1qnv";
 const PUBLIC_KEY = "DXbcwxmNpk-mrWio8";
+
+interface FormValues {
+  fullName: string;
+  email: string;
+  phone: string;
+  password: string;
+  passwordCheck: string;
+  formSubmitted: boolean;
+  success: boolean;
+}
 
 const initialFormValues = {
   fullName: "",
@@ -19,8 +30,9 @@ const initialFormValues = {
 };
 
 export const useFormControls = () => {
-  const [values, setValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState({} as any);
+  const [values, setValues] = useState<FormValues>(initialFormValues);
+  const [errors, setErrors] = useState<any>({});
+   
 
   const validate: any = (fieldValues = values) => {
     // console.log(fieldValues);
@@ -94,262 +106,89 @@ export const useFormControls = () => {
       fieldValues.fullName &&
       fieldValues.email &&
       fieldValues.password &&
-      fieldValues.passwordCheck;
-    Object.values(errors).every((x) => x === "");
+      fieldValues.passwordCheck &&
+      Object.values(errors).every((x) => x === "");
 
     return isValid;
   };
-// This is the original handleFormSubmit function for reference. 
-  // const handleFormSubmit = async (e: any) => {
-  //   // console.log("Form is Being Submitted!");
-  //   e.preventDefault();
-  //   const isValid =
-  //     formIsValid() && Object.values(errors).every((x) => x === "");
-  //   if (isValid) {
-  //     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, "#signupForm", PUBLIC_KEY).then(
-  //       (result) => {
-  //         console.log(result.text);
-  //         Swal.fire({
-  //           icon: "success",
-  //           title:
-  //             "Thanks for signing up! Check your email to finish the process.",
-  //         });
-  //         setValues({
-  //           ...initialFormValues,
-  //           formSubmitted: true,
-  //           success: true,
-  //         });
-  //       },
-  //       (error) => {
-  //         console.log(error.text);
-  //         Swal.fire({
-  //           icon: "error",
-  //           title: "Oops, something went wrong. Please try again later.",
-  //           text: error.text,
-  //         });
-  //         setValues({
-  //           ...initialFormValues,
-  //           formSubmitted: true,
-  //           success: false,
-  //         });
-  //       }
-  //     );
-  //   } else {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Oops, something went wrong. Please try again later.",
-  //       text: errors.text,
-  //     });
-  //     setValues({
-  //       ...initialFormValues,
-  //       formSubmitted: true,
-  //       success: false,
-  //     });
-  //   }
-  // };
 
-// This is the second handleFormSubmit function for reference.
-  // const handleFormSubmit = async (e: any) => {
-  //   e.preventDefault();
-  //   const isValid =
-  //     formIsValid() && Object.values(errors).every((x) => x === "");
-  //   if (isValid) {
-  //     try {
-  //       // Make a POST request to your server endpoint using axios
-  //       const response = await axios.post("/api/signup", values);
-  
-  //       // Handle the response as needed
-  //       console.log(response.data);
-  
-  //       // Continue with your emailjs logic
-  //       emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, "#signupForm", PUBLIC_KEY).then(
-  //         (result) => {
-  //           console.log(result.text);
-  //           Swal.fire({
-  //             icon: "success",
-  //             title:
-  //               "Thanks for signing up! Check your email to finish the process.",
-  //           });
-  //           setValues({
-  //             ...initialFormValues,
-  //             formSubmitted: true,
-  //             success: true,
-  //           });
-  //         },
-  //         (error) => {
-  //           console.log(error.text);
-  //           Swal.fire({
-  //             icon: "error",
-  //             title: "Oops, something went wrong. Please try again later.",
-  //             text: error.text,
-  //           });
-  //           setValues({
-  //             ...initialFormValues,
-  //             formSubmitted: true,
-  //             success: false,
-  //           });
-  //         }
-  //       );
-  //     } catch (error) {
-  //       // Handle errors from the server
-  //       console.error('Error submitting form:', error);
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "Oops, something went wrong. Please try again later.",
-  //         text: errors.message,
-  //       });
-  //       setValues({
-  //         ...initialFormValues,
-  //         formSubmitted: true,
-  //         success: false,
-  //       });
-  //     }
-  //   } else {
-  //     // Handle form validation errors
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Oops, something went wrong. Please try again later.",
-  //       text: errors.text,
-  //     });
-  //     setValues({
-  //       ...initialFormValues,
-  //       formSubmitted: true,
-  //       success: false,
-  //     });
-  //   }
-  // };
-
-// This is the third handleFormSubmit function for reference.
-// const handleFormSubmit = async (e: any) => {
-//   e.preventDefault();
-//   const isValid =
-//     formIsValid() && Object.values(errors).every((x) => x === "");
-
-//   if (isValid) {
-//     const TOKEN = Cookie.get('token');
-//     const { fullName, email, phone, password } = values;
-//     http.defaults.headers.common['Authorization'] = `Bearer ${TOKEN}`;
-
-//     try {
-//       // Make a POST request to your server endpoint using axios
-//       const response = await http.post("/users/signup", {
-//         name: fullName,
-//         phone: phone,
-//         email: email,
-//         password: password,
-//       }, {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       });
-
-//       // Handle the response as needed
-//       console.log(response.data);
-
-//       // Continue with your emailjs logic
-//       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, "#signupForm", PUBLIC_KEY);
-
-//       // Display success message to the user
-//       Swal.fire({
-//         icon: "success",
-//         title: "Thanks for signing up! Check your email to finish the process.",
-//       });
-
-//       // Reset form values on successful submission
-//       setValues({
-//         ...initialFormValues,
-//         formSubmitted: true,
-//         success: true,
-//       });
-//     } catch (error) {
-//       // Handle errors from the server
-//       console.error('Error submitting form:', error);
-//       Swal.fire({
-//         icon: "error",
-//         title: "Oops, something went wrong. Please try again later.",
-//         text: errors.response.data || "Unknown error occurred."
-//       });
-
-//       // Reset form values on error
-//       setValues({
-//         ...initialFormValues,
-//         formSubmitted: true,
-//         success: false,
-//       });
-//     }
-//   } else {
-//     // Handle form validation errors
-//     Swal.fire({
-//       icon: "error",
-//       title: "Oops, something went wrong. Please fix the form errors and try again.",
-//       text: errors.text,
-//     });
-
-//     // Reset form values on error
-//     setValues({
-//       ...initialFormValues,
-//       formSubmitted: true,
-//       success: false,
-//     });
-//   }
-// };
-
-const handleAxiosPost = async () => {
-  const TOKEN = Cookie.get('token');
+// Handle the Axios POST request
+const handleAxiosPost = async (): Promise<AxiosResponse> => {
+  console.log("Axios POST request is being made");
+  console.log(values);
+  // const TOKEN = Cookie.get('token');
+  // console.log("TOKEN:", TOKEN)
   const { fullName, email, phone, password } = values;
 
   try {
+    console.log("entered try block in handleAxiosPost")
     // Make a POST request to your server endpoint using axios
-    const response = await http.post("/users/signup", {
-      name: fullName,
-      phone: phone,
-      email: email,
-      password: password,
-    }, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${TOKEN}`,
+    const response: AxiosResponse = await axios.post('http://localhost:5000/api/users/signup',
+    { 
+        name: fullName,
+        phone: phone,
+        email: email,
+        password: password,
       },
-    });
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     // Handle the response as needed
-    console.log(response.data);
-
-    return response.data; // You can return data or handle it in the calling function
+    console.log("User Created", response.data);
+    return response;
   } catch (error) {
     // Handle errors from the server
-    console.error('Error submitting form:', error);
+    console.error('Error submitting form HAPF:', errors.response || errors.message || "Unknown error occurred");
 
     throw error; // Rethrow the error to be caught by the calling function
   }
 };
 
-const handleEmailJsForm = async () => {
+//This is a handleFormSubmit function like the one just above, but it gets rid of repeated code: 
+
+const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
   try {
-    // Continue with your emailjs logic
-    await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, "#signupForm", PUBLIC_KEY);
 
-    // Display success message to the user
-    Swal.fire({
-      icon: "success",
-      title: "Thanks for signing up! Check your email to finish the process.",
-    });
+    const isValid = formIsValid() && Object.values(errors).every((x) => x === "");
+    if (isValid) {
 
-    // Reset form values on successful submission
-    setValues({
-      ...initialFormValues,
-      formSubmitted: true,
-      success: true,
-    });
+      console.log("Form is valid!!!");
+      // Handle the Axios POST request
+      const axiosResponse = await handleAxiosPost();
+      console.log("Axios POST response:", axiosResponse);
+
+      // Continue with emailjs logic only if the Axios request is successful
+      const emailjsResponse = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, "#signupForm", PUBLIC_KEY);
+      console.log(emailjsResponse.text);
+
+      // Display success message to the user
+      Swal.fire({
+        icon: "success",
+        title: "Thanks for signing up! Check your email to finish the process.",
+      });
+
+      // Update state on successful submission
+      setValues({
+        ...initialFormValues,
+        formSubmitted: true,
+        success: true,
+      });
+    } else {
+      throw new Error("Form validation failed");
+    }
   } catch (error) {
-    // Handle errors from the emailjs logic
-    console.error('Error submitting emailjs form:', error);
+    console.error('Error submitting form HFSF:', errors.message || error);
 
     // Display an error message to the user
     Swal.fire({
       icon: "error",
-      title: "Oops, something went wrong with the emailjs form. Please try again later.",
-      text: "Emailjs form submission failed",
+      title: "Oops, something went wrong. Please try again later.",
+      text: errors.response?.data || errors.message || "Unknown error occurred",
     });
 
     // Reset form values on error
@@ -361,40 +200,6 @@ const handleEmailJsForm = async () => {
   }
 };
 
-const handleFormSubmit = async (e: any) => {
-  e.preventDefault();
-  const isValid =
-    formIsValid() && Object.values(errors).every((x) => x === "");
-
-  if (isValid) {
-    try {
-      // Handle the Axios POST request
-      const axiosResponse = await handleAxiosPost();
-
-      // Continue with emailjs logic only if the Axios request is successful
-      if (axiosResponse) {
-        await handleEmailJsForm();
-      }
-    } catch (error) {
-      // Handle errors from either Axios or emailjs
-      console.error('Error submitting form:', error);
-    }
-  } else {
-    // Handle form validation errors
-    Swal.fire({
-      icon: "error",
-      title: "Oops, something went wrong. Please fix the form errors and try again.",
-      text: errors.text,
-    });
-
-    // Reset form values on error
-    setValues({
-      ...initialFormValues,
-      formSubmitted: true,
-      success: false,
-    });
-  }
-};
 
   return {
     values,
