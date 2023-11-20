@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     const callAPI = async () => {
       try {
-        const res = await fetch("http://localhost:9000/testAPI");
+        const res = await fetch("http://localhost:9000/api/");
         const data = await res.text();
         setAPIResponse(data);
       } catch (error) {
