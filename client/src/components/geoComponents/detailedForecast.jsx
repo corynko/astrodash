@@ -1,8 +1,13 @@
-import { Modal } from "@mui/material";
-import { useState } from "react";
+import { useContext } from "react";
+import { format, utcToZonedTime } from "date-fns-tz";
+import { startOfDay, isSameDay } from "date-fns";
+
+// context imports
 import MeteoContext from "../../contexts/meteoContext";
+import WeatherContext from "../../contexts/WeatherContext";
 
 // mui imports
+import { Modal } from "@mui/material";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -13,31 +18,23 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const createData = (
-  hour,
-  temperature,
-  clouds,
-  transparency,
-  seeing,
-  precipitation
-) => {
-  return { hour, temperature, clouds, transparency, seeing, precipitation };
-};
+function DetailedForecastTable({ hourlyData }) {
+  const tableContainerStyle = {
+    maxHeight: "60vh",
+    overflow: "auto",
+  };
 
-const rows = [
-  createData("hour", 159, 6.0, 24, 4.0),
-  createData("avg. temperature", 237, 9.0, 37, 4.3),
-  createData("clouds", 262, 16.0, 24, 6.0),
-  createData("transparency", 305, 3.7, 67, 4.3),
-  createData("seeing", 356, 16.0, 49, 3.9),
-];
+  const { weatherData } = useContext(WeatherContext);
 
-function DetailedForecastTable() {
+  const timezone = weatherData?.location.tz_id;
+
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} style={tableContainerStyle}>
       <Table sx={{ minWidth: 850 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow
+            style={{ position: "sticky", top: 0, backgroundColor: "#3E3E3E" }}
+          >
             <TableCell>hour</TableCell>
             <TableCell align="center">avg. temp</TableCell>
             <TableCell align="center">cloud cover %</TableCell>
@@ -47,38 +44,85 @@ function DetailedForecastTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.temp}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
+          {hourlyData.map((hour, index) => {
+            const zonedDate = utcToZonedTime(hour.date, timezone);
+            // `for data verification purposes only`
+            // const formattedDate = format(zonedDate, "PPPP", {
+            //   timeZone: timezone,
+            // });
+            const formattedHour = format(zonedDate, "h aaa zzz", {
+              timeZone: timezone,
+            });
+
+            return (
+              <TableRow
+                key={index}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {formattedHour}
+                  {/* for verification uncomment following line */}
+                  {/*, on {formattedDate}*/}
+                </TableCell>
+                <TableCell align="right">{hour.value}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
   );
 }
 
-const DetailedForecast = ({ isOpen, data, onClose }) => {
-  if (!isOpen) {
+const DetailedForecast = ({ isOpen, cardId, onClose }) => {
+  const { meteoData } = useContext(MeteoContext);
+  const { weatherData } = useContext(WeatherContext);
+  if (!isOpen || !meteoData || !weatherData || !cardId) {
     return null;
   }
+
+  // use the tz_id from weatherData to get the local timezone
+  const timezone = weatherData.location.tz_id;
+
+  // convert all dates to the local timezone
+  const localHourlyData = meteoData.data[0].coordinates[0].dates.map((hour) => {
+    const localDate = utcToZonedTime(hour.date, timezone);
+    return {
+      ...hour,
+      localDate,
+    };
+  });
+
+  // return the correct forecast data from the meteo object
+  const cardIndex = parseInt(cardId.replace("forecastCard-", ""), 10);
+
+  // find the index of the first hour that matches the local midnight
+  const localMidnight = startOfDay(new Date());
+  const startIndex = localHourlyData.findIndex((hour) =>
+    isSameDay(hour.localDate, localMidnight)
+  );
+
+  // adjust cardIndex to find the correct slice based on the local timezone
+  const adjustedStartIndex = startIndex + cardIndex * 24;
+  const adjustedEndIndex = adjustedStartIndex + 24;
+  const slicedHourlyData = localHourlyData.slice(
+    adjustedStartIndex,
+    adjustedEndIndex
+  );
+
+  const localDate =
+    slicedHourlyData.length > 0 ? slicedHourlyData[0].localDate : null;
+
+  // Format the local date for display
+  const displayDate = localDate
+    ? format(localDate, "PPPP", { timeZone: timezone })
+    : "";
 
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    // width: 400,
     bgcolor: "#00000080",
     border: "2px solid #000",
     boxShadow: 24,
@@ -87,18 +131,11 @@ const DetailedForecast = ({ isOpen, data, onClose }) => {
 
   return (
     <Modal open={isOpen} onClose={onClose}>
-      <Fade in={isOpen}>
+      <Fade in={isOpen} {...(isOpen ? { timeout: 500 } : {})}>
         <Box sx={style}>
           <div>
-            <p className="profileText">Card ID: {data}</p>
-            <DetailedForecastTable />
-            {/* {data.map((hour, index) => (
-              <div key={index}>
-                <p>
-                  {hour.date}: {hour.value}°F
-                </p>
-              </div>
-            ))} */}
+            <p className="textCenter detailedForecastDate">{displayDate}</p>
+            <DetailedForecastTable hourlyData={slicedHourlyData} />
           </div>
         </Box>
       </Fade>

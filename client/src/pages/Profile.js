@@ -1,16 +1,15 @@
-import AppBarHeightContext from "../contexts/AppBarHeightContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Tab, Tabs, Box } from "@mui/material";
+
+// context imports
+import { WeatherProvider } from "../contexts/WeatherContext";
+import { MeteoProvider } from "../contexts/meteoContext";
 
 // tab imports
 import ForecastTab from "../components/profileTabs/ForecastTab";
 import { DashboardTab } from "../components/profileTabs/DashboardTab";
 import { NavigationTab } from "../components/profileTabs/NavigationTab";
 import { UtilitiesTab } from "../components/profileTabs/UtilitiesTab";
-
-// context imports
-import { WeatherProvider } from "../contexts/WeatherContext";
-import { MeteoProvider } from "../contexts/meteoContext";
 
 export default function Profile() {
   const [selectedTab, setSelectedTab] = useState(0);

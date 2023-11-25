@@ -21,8 +21,8 @@ const ForecastTab = ({ weatherData }) => {
   };
 
   const { meteoData } = useContext(MeteoContext);
-  const [modalData, setModalData] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [setModalData] = useState(null);
+  const [setModalOpen] = useState(false);
   const handleViewDetails = (date) => {
     // filter the meteoData for the selected date
     const hourlyData = meteoData.data[0].coordinates[0].dates.filter((d) =>
@@ -85,9 +85,12 @@ const ForecastTab = ({ weatherData }) => {
         )}
         {weatherData && <ForecastDisplay />}
         {!currentLocationName && (
-          <h6 className="homeHeader m25 textCenter stroke25">
+          <h6
+            style={{ maxWidth: "60vw" }}
+            className="homeHeader m25 textCenter stroke25"
+          >
             you can search for a city, address, location, zip code, and more. if
-            searching a city, include the country as well.
+            searching a city, include the state, region, and/or country as well.
           </h6>
         )}
       </div>
