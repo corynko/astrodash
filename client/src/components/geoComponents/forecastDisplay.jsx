@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import WeatherContext from "../../contexts/WeatherContext";
-import MeteoContext from "../../contexts/meteoContext";
 import { motion } from "framer-motion";
+
 import DetailedForecast from "./detailedForecast";
+import WeatherContext from "../../contexts/WeatherContext";
 
 // mui imports
 import Card from "@mui/material/Card";
@@ -204,7 +204,7 @@ const ForecastDisplayCard = ({
 
   const handleViewDetails = () => {
     // filter the meteoData for the selected date
-    handleOpenModal(`forecastCard-${indexNumber}`, { indexNumber });
+    handleOpenModal(`forecastCard-${indexNumber}`);
   };
 
   let divVariants = {
@@ -289,12 +289,10 @@ function ForecastDisplay() {
 
   const [modalData, setModalData] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [cardId, setCardId] = useState(false);
 
-  const handleOpenModal = (cardId, indexNumber) => {
-    // Here you can fetch the data based on cardId
-    // For now, we'll just pass the cardId to the modal
-    const index = indexNumber;
-    setModalData(cardId);
+  const handleOpenModal = (cardId) => {
+    setCardId(cardId);
     setModalOpen(true);
   };
 
@@ -322,7 +320,7 @@ function ForecastDisplay() {
         ))}
         <DetailedForecast
           isOpen={modalOpen}
-          data={modalData}
+          cardId={cardId}
           onClose={() => setModalOpen(false)}
         />
       </div>

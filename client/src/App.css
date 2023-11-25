@@ -245,6 +245,12 @@ body {
   font-family: "GothamLight";
 }
 
+.detailedForecastDate {
+  color: var(--darkwhite);
+  font-family: "GothamLight";
+  font-size: larger;
+}
+
 @media (max-width: 1000px) {
   .wideMobileColumn {
     flex-direction: column;

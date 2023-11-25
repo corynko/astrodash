@@ -1,13 +1,17 @@
 import { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { addDays, addHours, formatISO } from "date-fns";
+
+// context imports
+import WeatherContext from "../../contexts/WeatherContext";
+import MeteoContext from "../../contexts/meteoContext";
+
+// mui imports
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import { CircularProgress } from "@mui/material";
-import axios from "axios";
-import WeatherContext from "../../contexts/WeatherContext";
-import MeteoContext from "../../contexts/meteoContext";
 
-//TODO: Add some form of visual indication that the result is loading upon button click
 const SearchForm = ({ setIsDay }) => {
   const { weatherData, setWeatherData } = useContext(WeatherContext);
   const { meteoData, setMeteoData } = useContext(MeteoContext);
@@ -79,35 +83,41 @@ const SearchForm = ({ setIsDay }) => {
   useEffect(() => {
     if (weatherData) {
       const startDate = weatherData.forecast.forecastday[0].date;
-      const endDate = weatherData.forecast.forecastday[6].date;
+      let endDate = new Date(weatherData.forecast.forecastday[6].date);
+      // console.log(endDate);
+      endDate = addDays(endDate, 2); // add one day to include the end of the last day
+      endDate = addHours(endDate, 7); // add one day to include the end of the last day
+      // console.log(endDate);
+      const formattedEndDate = formatISO(endDate, { representation: "date" }); // format it as 'YYYY-MM-DD' to match startDate
+      // console.log(formattedEndDate);
       const lat = weatherData.location.lat;
       const lon = weatherData.location.lon;
-      getMeteoData(lat, lon, startDate, endDate);
+      getMeteoData(lat, lon, startDate, formattedEndDate);
     }
-  }, [weatherData]); // Only run when weatherData changes
+  }, [weatherData]); // only run when weatherData changes
 
   const getMeteoData = async (lat, lon, startDate, endDate) => {
-    const username = process.env.REACT_APP_METEO_USERNAME; // Replace with your username
-    const password = process.env.REACT_APP_METEO_PASSWORD; // Replace with your password
+    const username = process.env.REACT_APP_METEO_USERNAME;
+    const password = process.env.REACT_APP_METEO_PASSWORD;
     const timeStep = "PT1H"; // 1 hour time step
 
     // Format the start and end dates in ISO format (YYYY-MM-DDTHH:mm:ssZ)
     const formattedStartDate = `${startDate}T00:00:00Z`;
     const formattedEndDate = `${endDate}T00:00:00Z`;
-    console.log(formattedStartDate, formattedEndDate);
+    // console.log(formattedStartDate, formattedEndDate);
 
     // Construct the Meteomatics API URL
     const url = `https://api.meteomatics.com/${formattedStartDate}--${formattedEndDate}:${timeStep}/t_2m:F/${lat},${lon}/json`;
 
     try {
       // Basic Auth header
-      console.log(lat, lon);
+      // console.log(lat, lon);
       const auth = btoa(`${username}:${password}`);
       const headers = { Authorization: `Basic ${auth}` };
 
       // Make the API call
       const response = await axios.get(url, { headers });
-      console.log(response.data);
+      // console.log(response.data);
       // Handle the response data
       setMeteoData(response.data);
     } catch (error) {

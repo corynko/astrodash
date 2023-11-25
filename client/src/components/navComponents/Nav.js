@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import AppBarHeightContext from "../../contexts/AppBarHeightContext";
+
 // non-animated imports
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,6 +13,9 @@ import NavItemsDesktop from "./desktop/navItemsDesktop";
 
 export default function Nav() {
   // const appBarHeight = useContext(AppBarHeightContext);
+  // const coverPageStyle = {
+  //   minHeight: `calc(100vh - ${appBarHeight}px - 150px)`,
+  // };
 
   return (
     <AppBar
