@@ -1,4 +1,5 @@
 import AppBarHeightContext from "../../contexts/AppBarHeightContext";
+import MeteoContext from "../../contexts/meteoContext";
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@mui/material";
@@ -12,10 +13,24 @@ const ForecastTab = ({ weatherData }) => {
   const currentLocationName = weatherData?.location.name;
   const currentLocationRegion = weatherData?.location.region;
   const currentLocationCountry = weatherData?.location.country;
+  const day = weatherData?.forecast.forecastday[0].date;
 
   const appBarHeight = useContext(AppBarHeightContext);
   const coverPageStyle = {
     minHeight: `calc(100vh - ${appBarHeight}px - 150px)`,
+  };
+
+  const { meteoData } = useContext(MeteoContext);
+  const [modalData, setModalData] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleViewDetails = (date) => {
+    // filter the meteoData for the selected date
+    const hourlyData = meteoData.data[0].coordinates[0].dates.filter((d) =>
+      d.date.startsWith(date)
+    );
+    // open the modal and pass the hourlyData to it
+    setModalData(hourlyData);
+    setModalOpen(true);
   };
 
   let divVariants = {
@@ -61,7 +76,12 @@ const ForecastTab = ({ weatherData }) => {
           {weatherData && <ConditionDisplay isDay={isDay} />}
         </div>
         {weatherData && (
-          <Button sx={{ fontSize: "16px" }}>view today's forecast</Button>
+          <Button
+            sx={{ fontSize: "16px" }}
+            onClick={() => handleViewDetails(day.date)}
+          >
+            view today's forecast
+          </Button>
         )}
         {weatherData && <ForecastDisplay />}
         {!currentLocationName && (
