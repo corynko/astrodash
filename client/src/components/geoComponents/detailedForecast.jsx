@@ -110,6 +110,14 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
     adjustedEndIndex
   );
 
+  const localDate =
+    slicedHourlyData.length > 0 ? slicedHourlyData[0].localDate : null;
+
+  // Format the local date for display
+  const displayDate = localDate
+    ? format(localDate, "PPPP", { timeZone: timezone })
+    : "";
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -126,7 +134,7 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
       <Fade in={isOpen} {...(isOpen ? { timeout: 500 } : {})}>
         <Box sx={style}>
           <div>
-            <p className="textCenter detailedForecastDate">Card ID: {cardId}</p>
+            <p className="textCenter detailedForecastDate">{displayDate}</p>
             <DetailedForecastTable hourlyData={slicedHourlyData} />
           </div>
         </Box>
