@@ -87,8 +87,8 @@ const SearchForm = ({ setIsDay }) => {
   }, [weatherData]); // Only run when weatherData changes
 
   const getMeteoData = async (lat, lon, startDate, endDate) => {
-    const username = "astrodash_kotel_ethan"; // Replace with your username
-    const password = "D5R3BrGna1"; // Replace with your password
+    const username = process.env.REACT_APP_METEO_USERNAME; // Replace with your username
+    const password = process.env.REACT_APP_METEO_PASSWORD; // Replace with your password
     const timeStep = "PT1H"; // 1 hour time step
 
     // Format the start and end dates in ISO format (YYYY-MM-DDTHH:mm:ssZ)
