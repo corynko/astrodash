@@ -1,13 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import WeatherContext from "../../contexts/WeatherContext";
+import MeteoContext from "../../contexts/meteoContext";
 import { motion } from "framer-motion";
+import DetailedForecast from "./detailedForecast";
 
 // mui imports
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
@@ -172,7 +172,12 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
   );
 };
 
-const ForecastDisplayCard = ({ day, isTomorrow }) => {
+const ForecastDisplayCard = ({
+  day,
+  isTomorrow,
+  indexNumber,
+  handleOpenModal,
+}) => {
   //date/day of week variables
   const forecastDate = new Date(day.date + "T00:00:00");
   const dayOfWeekIndex = forecastDate.getDay();
@@ -197,6 +202,11 @@ const ForecastDisplayCard = ({ day, isTomorrow }) => {
   const highTemp = day.day.maxtemp_f;
   const lowTemp = day.day.mintemp_f;
 
+  const handleViewDetails = () => {
+    // filter the meteoData for the selected date
+    handleOpenModal(`forecastCard-${indexNumber}`, { indexNumber });
+  };
+
   let divVariants = {
     start: { opacity: 0 },
     finished: {
@@ -211,7 +221,12 @@ const ForecastDisplayCard = ({ day, isTomorrow }) => {
   };
 
   return (
-    <motion.div variants={divVariants} initial="start" animate="finished">
+    <motion.div
+      variants={divVariants}
+      initial="start"
+      animate="finished"
+      id={`forecastCard-${indexNumber}`}
+    >
       <div className="flex between">
         <Card
           className="flex center column textCenter"
@@ -236,7 +251,9 @@ const ForecastDisplayCard = ({ day, isTomorrow }) => {
               className="mobileColumn"
               gutterBottom
             >
-              {conditionTextLower}, {moonIllumination}% illumination
+              <>
+                {conditionTextLower}, <br /> {moonIllumination}% illumination
+              </>
             </Typography>
             <Typography variant="h5" component="div">
               {dayOfWeekLower}
@@ -251,7 +268,9 @@ const ForecastDisplayCard = ({ day, isTomorrow }) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">view detailed forecast</Button>
+            <Button size="small" onClick={handleViewDetails}>
+              view detailed forecast
+            </Button>
           </CardActions>
         </Card>
       </div>
@@ -268,6 +287,17 @@ function ForecastDisplay() {
   const firstRow = slicedForecastDays.slice(0, 3);
   const secondRow = slicedForecastDays.slice(3, 6);
 
+  const [modalData, setModalData] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = (cardId, indexNumber) => {
+    // Here you can fetch the data based on cardId
+    // For now, we'll just pass the cardId to the modal
+    const index = indexNumber;
+    setModalData(cardId);
+    setModalOpen(true);
+  };
+
   return (
     <div>
       <div className="flex wrap between m25 g25 wideMobileColumn">
@@ -276,13 +306,25 @@ function ForecastDisplay() {
             key={day.date}
             day={day}
             isTomorrow={index === 0}
+            indexNumber={index + 1}
+            handleOpenModal={handleOpenModal}
           />
         ))}
       </div>
       <div className="flex wrap between m25 g25 wideMobileColumn">
         {secondRow.map((day, index) => (
-          <ForecastDisplayCard key={day.date} day={day} />
+          <ForecastDisplayCard
+            key={day.date}
+            day={day}
+            indexNumber={index + 4}
+            handleOpenModal={handleOpenModal}
+          />
         ))}
+        <DetailedForecast
+          isOpen={modalOpen}
+          data={modalData}
+          onClose={() => setModalOpen(false)}
+        />
       </div>
     </div>
   );

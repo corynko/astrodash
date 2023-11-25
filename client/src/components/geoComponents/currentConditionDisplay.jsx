@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import WeatherContext from "../../contexts/WeatherContext";
 import { motion } from "framer-motion";
 import { Button } from "@mui/material";
