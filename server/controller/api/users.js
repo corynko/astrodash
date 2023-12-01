@@ -30,7 +30,28 @@ router.get('/', async (req, res) => {
 // create a new user
 router.post('/signup', async (req, res) => {
   try {
+    console.log("entered create user try block");
     const userData = await User.create(req.body);
+
+    // generate token
+    const token = jwt.sign(
+      { id: userData.id }, // payload
+      process.env.TOKEN_SECRET, // secret
+      { expiresIn: '30d' // expiration
+    }); 
+
+    console.log("token generated");
+
+    // set token in a cookie
+    res.cookie('token', token, { 
+      httpOnly: true, // client side js cannot access cookie
+      secure: process.env.NODE_ENV === 'production', // cookie only works in https
+      maxAge: 1000 * 60 * 60 * 24 * 30 // cookie expires in 30 days
+    });
+
+    console.log("cookie set");
+
+
     res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);
