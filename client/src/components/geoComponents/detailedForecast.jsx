@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { format, utcToZonedTime } from "date-fns-tz";
 import { startOfDay, isSameDay } from "date-fns";
 
 // context imports
 import MeteoContext from "../../contexts/meteoContext";
 import WeatherContext from "../../contexts/WeatherContext";
+import DetailedHourlyContext from "../../contexts/detailedHourlyContext";
 
 // mui imports
 import { Modal } from "@mui/material";
@@ -36,7 +37,8 @@ function DetailedForecastTable({ hourlyData }) {
             style={{ position: "sticky", top: 0, backgroundColor: "#3E3E3E" }}
           >
             <TableCell>hour</TableCell>
-            <TableCell align="center">avg. temp</TableCell>
+            <TableCell align="center">avg. temp (F)</TableCell>
+            <TableCell align="center">feels like</TableCell>
             <TableCell align="center">cloud cover %</TableCell>
             <TableCell align="center">atmos. transparency</TableCell>
             <TableCell align="center">astro seeing</TableCell>
@@ -77,7 +79,23 @@ function DetailedForecastTable({ hourlyData }) {
 const DetailedForecast = ({ isOpen, cardId, onClose }) => {
   const { meteoData } = useContext(MeteoContext);
   const { weatherData } = useContext(WeatherContext);
-  if (!isOpen || !meteoData || !weatherData || !cardId) {
+  const { detailedHourly } = useContext(DetailedHourlyContext);
+  console.log(detailedHourly);
+  useEffect(() => {
+    if (detailedHourly && detailedHourly.data && detailedHourly.data.hourly) {
+      // Now that detailedHourly is defined, you can safely access detailedHourly.data.hourly
+      // Perform any operations that depend on detailedHourly.data.hourly here
+      console.log(
+        "Detailed hourly data is now available: ",
+        detailedHourly.data.hourly
+      );
+    }
+  }, [detailedHourly]); // This effect will rerun when detailedHourly changes
+  if (!detailedHourly || !detailedHourly.data) {
+    return <div>Loading detailed hourly data...</div>;
+  }
+
+  if (!isOpen || !meteoData || !weatherData || !detailedHourly || !cardId) {
     return null;
   }
 
@@ -92,6 +110,10 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
       localDate,
     };
   });
+
+  // const detailedFeelsLike = detailedHourly.data.hourly.apparent_temperature;
+  // const detailedCloudCover = detailedHourly.data.hourly.cloud_cover;
+  // const detailedPrecipitation = detailedHourly.data.hourly.precipitation;
 
   // return the correct forecast data from the meteo object
   const cardIndex = parseInt(cardId.replace("forecastCard-", ""), 10);
@@ -129,6 +151,7 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
     p: 3,
   };
 
+  //TODO: fix fade not applying to closing the modal
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Fade in={isOpen} {...(isOpen ? { timeout: 500 } : {})}>
