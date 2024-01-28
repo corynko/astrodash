@@ -19,7 +19,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-function DetailedForecastTable({ hourlyData }) {
+function DetailedForecastTable({
+  hourlyData,
+  hourlyTemp,
+  hourlyFeelsLike,
+  hourlyCloudCover,
+  hourlyPrecipitation,
+}) {
   const tableContainerStyle = {
     maxHeight: "60vh",
     overflow: "auto",
@@ -38,8 +44,8 @@ function DetailedForecastTable({ hourlyData }) {
           >
             <TableCell>hour</TableCell>
             <TableCell align="center">avg. temp (F)</TableCell>
-            <TableCell align="center">feels like</TableCell>
-            <TableCell align="center">cloud cover %</TableCell>
+            <TableCell align="center">feels like (F)</TableCell>
+            <TableCell align="center">cloud cover</TableCell>
             <TableCell align="center">atmos. transparency</TableCell>
             <TableCell align="center">astro seeing</TableCell>
             <TableCell align="center">precipitation (mm.)</TableCell>
@@ -59,14 +65,37 @@ function DetailedForecastTable({ hourlyData }) {
             return (
               <TableRow
                 key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  th: { borderRight: "1px solid #515151" },
+                  "&:last-child td, &:last-child th": {
+                    borderBottom: "4px solid #515151",
+                    borderRight: "1px solid #515151",
+                  },
+                }}
               >
                 <TableCell component="th" scope="row">
                   {formattedHour}
                   {/* for verification uncomment following line */}
                   {/*, on {formattedDate}*/}
                 </TableCell>
-                <TableCell align="right">{hour.value}</TableCell>
+                <TableCell component="th" align="right">
+                  {hourlyTemp[index] + "°"}
+                </TableCell>
+                <TableCell component="th" align="right">
+                  {hourlyFeelsLike[index] + "°"}
+                </TableCell>
+                <TableCell component="th" align="right">
+                  {hourlyCloudCover[index] + "%"}
+                </TableCell>
+                <TableCell component="th" align="right">
+                  {/* atmos. transparency data here */}
+                </TableCell>
+                <TableCell component="th" align="right">
+                  {/* astro seeing data here */}
+                </TableCell>
+                <TableCell component="th" align="right">
+                  {hourlyPrecipitation[index]}
+                </TableCell>
               </TableRow>
             );
           })}
@@ -91,11 +120,11 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
       );
     }
   }, [detailedHourly]); // This effect will rerun when detailedHourly changes
-  if (!detailedHourly || !detailedHourly.data) {
-    return <div>Loading detailed hourly data...</div>;
-  }
+  // if (!detailedHourly || !detailedHourly.data) {
+  //   return <div>Loading detailed hourly data...</div>;
+  // }
 
-  if (!isOpen || !meteoData || !weatherData || !detailedHourly || !cardId) {
+  if (!isOpen || !meteoData || !weatherData || !cardId) {
     return null;
   }
 
@@ -111,9 +140,10 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
     };
   });
 
-  // const detailedFeelsLike = detailedHourly.data.hourly.apparent_temperature;
-  // const detailedCloudCover = detailedHourly.data.hourly.cloud_cover;
-  // const detailedPrecipitation = detailedHourly.data.hourly.precipitation;
+  const detailedTemperature = detailedHourly?.hourly.temperature_2m;
+  const detailedFeelsLike = detailedHourly?.hourly.apparent_temperature;
+  const detailedCloudCover = detailedHourly?.hourly.cloud_cover;
+  const detailedPrecipitation = detailedHourly?.hourly.precipitation;
 
   // return the correct forecast data from the meteo object
   const cardIndex = parseInt(cardId.replace("forecastCard-", ""), 10);
@@ -127,6 +157,22 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
   // adjust cardIndex to find the correct slice based on the local timezone
   const adjustedStartIndex = startIndex + cardIndex * 24;
   const adjustedEndIndex = adjustedStartIndex + 24;
+  const slicedTemp = detailedTemperature.slice(
+    adjustedStartIndex,
+    adjustedEndIndex
+  );
+  const slicedFeelsLike = detailedFeelsLike.slice(
+    adjustedStartIndex,
+    adjustedEndIndex
+  );
+  const slicedCloudCover = detailedCloudCover.slice(
+    adjustedStartIndex,
+    adjustedEndIndex
+  );
+  const slicedPrecipitation = detailedPrecipitation.slice(
+    adjustedStartIndex,
+    adjustedEndIndex
+  );
   const slicedHourlyData = localHourlyData.slice(
     adjustedStartIndex,
     adjustedEndIndex
@@ -158,7 +204,13 @@ const DetailedForecast = ({ isOpen, cardId, onClose }) => {
         <Box sx={style}>
           <div>
             <p className="textCenter detailedForecastDate">{displayDate}</p>
-            <DetailedForecastTable hourlyData={slicedHourlyData} />
+            <DetailedForecastTable
+              hourlyData={slicedHourlyData}
+              hourlyTemp={slicedTemp}
+              hourlyFeelsLike={slicedFeelsLike}
+              hourlyCloudCover={slicedCloudCover}
+              hourlyPrecipitation={slicedPrecipitation}
+            />
           </div>
         </Box>
       </Fade>

@@ -294,6 +294,8 @@ function ForecastDisplay() {
   const handleOpenModal = (cardId) => {
     setCardId(cardId);
     setModalOpen(true);
+    console.log("modal should be open now");
+    console.log(cardId + " this modal, specifically");
   };
 
   return (
