@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.847ea18f.css",
-    "main.js": "/static/js/main.6a41c7b6.js",
+    "main.css": "/static/css/main.6134f1d0.css",
+    "main.js": "/static/js/main.eee7d16e.js",
     "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
     "static/media/astrodash_contact_cover_ahasanara_akter.jpg": "/static/media/astrodash_contact_cover_ahasanara_akter.4ec168e1f7121eba19f9.jpg",
     "static/media/astrodash_home_cover_marcelo_maturana.jpg": "/static/media/astrodash_home_cover_marcelo_maturana.9d8f3913968fe7195ec2.jpg",
@@ -22,12 +22,12 @@
     "static/media/waxing_gibbous_trans.png": "/static/media/waxing_gibbous_trans.1c74604394a7525843a0.png",
     "static/media/waxing_crescent_trans.png": "/static/media/waxing_crescent_trans.cc665c1271463601f87b.png",
     "index.html": "/index.html",
-    "main.847ea18f.css.map": "/static/css/main.847ea18f.css.map",
-    "main.6a41c7b6.js.map": "/static/js/main.6a41c7b6.js.map",
+    "main.6134f1d0.css.map": "/static/css/main.6134f1d0.css.map",
+    "main.eee7d16e.js.map": "/static/js/main.eee7d16e.js.map",
     "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.847ea18f.css",
-    "static/js/main.6a41c7b6.js"
+    "static/css/main.6134f1d0.css",
+    "static/js/main.eee7d16e.js"
   ]
 }
