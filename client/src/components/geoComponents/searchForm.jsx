@@ -137,7 +137,7 @@ const SearchForm = ({ setIsDay }) => {
   };
 
   const getDetailedHourly = async (lat, lon) => {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,apparent_temperature,precipitation,cloud_cover&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto&models=best_match`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,apparent_temperature,precipitation,cloud_cover&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto&forecast_days=9&models=best_match`;
     try {
       const response = await axios.get(url);
       setDetailedHourly(response.data);

@@ -83,6 +83,8 @@ const WeatherCondition = ({ conditionCode }) => {
 };
 
 const MoonDisplay = ({ moonPhase, moonIllumination }) => {
+  console.log(moonIllumination);
+  console.log(moonPhase);
   const getImageForPhase = (phase, illumination) => {
     const illum = parseInt(illumination, 10);
 
@@ -120,7 +122,7 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
     // waning gibbous, third quarter, or waning crescent between 40 and 60%
     if (
       (phase === "Waning Gibbous" ||
-        phase === "Third Quarter" ||
+        phase === "Last Quarter" ||
         phase === "Waning Crescent") &&
       illum > 40 &&
       illum <= 60
@@ -152,7 +154,7 @@ const MoonDisplay = ({ moonPhase, moonIllumination }) => {
         return FullMoon;
       case "Waning Gibbous":
         return WaningGibbous;
-      case "Third Quarter":
+      case "Last Quarter":
         return ThirdQuarter;
       case "Waning Crescent":
         return WaningCrescent;
